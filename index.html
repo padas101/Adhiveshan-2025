@@ -102,14 +102,24 @@ button:hover {
         color: black;
     }
 
-    .hint {
-        margin-top: 10px;
-        padding: 10px;
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        display: none;
+.hint, .answer {
+    margin-top: 10px;
+    padding: 15px; /* Consistent padding for both hints and answers */
+    background-color: #f9f9f9; /* Light gray background */
+    border: 1px solid #ddd; /* Subtle border for better separation */
+    border-radius: 5px; /* Rounded edges for a clean look */
+    font-size: 1.2rem; /* Larger default font size */
+    line-height: 1.5; /* Improved spacing for readability */
+    display: none; /* Initially hidden */
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 480px) {
+    .hint, .answer {
+        font-size: 1.3rem; /* Increase font size further for small screens */
+        padding: 20px; /* Additional padding for touch-friendly design */
     }
+}
 
     .summary {
         margin-top: 20px;
@@ -207,7 +217,7 @@ button:hover {
             <button onclick="showHint(2)">Show Hint 2</button>
             <div id="hint2" class="hint">Hint 2 content</div>
             <button onclick="showAnswer()">Show Answer</button>
-            <div id="answer" class="hint">Answer content</div>
+            <div id="answer" class="answer">Answer content</div>
         </div>
         <button onclick="prevQuestion()">Previous</button>
         <button onclick="nextQuestion()">Next</button>
@@ -453,6 +463,7 @@ function restartTest() {
         <button onclick="closeModal()">Close</button>
     </div>
 </div>
+
 
 </body>
 </html>
