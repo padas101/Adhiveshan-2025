@@ -15,12 +15,33 @@
         margin: 20px;
     }
 
-    .title {
-        font-size: clamp(1.8rem, 2.5vw, 2.5rem); /* Responsive font size */
-        font-weight: bold;
-        color: orange;
-        margin-bottom: 20px;
-    }
+.title {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: orange;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+.title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -5px; /* Adjust for spacing below the text */
+    border-bottom: 3px double black; /* Double underline effect */
+    width: 100%;
+}
+
+.mode-buttons {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center align the buttons */
+    gap: 15px; /* Add space between buttons */
+    margin-top: 20px;
+}
+
 
     .subtitle {
         font-size: clamp(1.2rem, 2vw, 1.5rem); /* Responsive subtitle font */
@@ -46,18 +67,21 @@
 
 button {
     margin-top: 10px;
-    padding: 10px 15px;
-    font-size: 1rem; /* Responsive font size */
+    padding: 15px 20px; /* Increase padding for larger buttons */
+    font-size: 1.2rem; /* Larger font size */
     border: none;
     border-radius: 5px;
     background-color: #007BFF;
     color: white;
     cursor: pointer;
-    width: auto; /* Default width adapts to content */
-    max-width: 200px; /* Prevent excessively wide buttons */
-    min-width: 100px; /* Ensure minimum button size */
     text-align: center;
+    max-width: 250px; /* Prevent buttons from becoming too wide */
 }
+
+button:hover {
+    background-color: #0056b3;
+}
+
 
 button:hover {
     background-color: #0056b3;
@@ -164,12 +188,15 @@ button:hover {
         <button onclick="startRandomTestAllPushpa()">Random Test for All Pushpa</button>
     </div>
 
-    <div id="choose-mode-page" style="display: none;">
-        <div class="title">Choose Mode</div>
-        <button onclick="startPracticeMode()">Practice Mukhpath</button>
-        <button onclick="startRandomTestForPushpa()">Test this Pushpa</button>
+<div id="choose-mode-page" style="display: none;">
+    <div class="title">Choose Mode</div>
+    <div class="mode-buttons">
+        <button onclick="startPracticeMode()">Practice Mode</button>
+        <button onclick="startRandomTestForPushpa()">Random Test for This Pushpa</button>
         <button onclick="returnToMain()">Go Back to Main Page</button>
     </div>
+</div>
+
 
     <div id="practice-page" style="display: none;">
         <div class="title">Practice Mukhpath</div>
@@ -369,7 +396,13 @@ function endRandomTest() {
 
 function viewIncorrect(index) {
     const question = incorrectQuestions[index];
-    alert(`Question: ${question.question}\nAnswer: ${question.answer.replace(/<br>/g, '\n').replace(/<[^>]+>/g, '')}`);
+    document.getElementById("modal-question").innerText = question.question;
+    document.getElementById("modal-answer").innerHTML = question.answer;
+    document.getElementById("popup-modal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("popup-modal").style.display = "none";
 }
 
 
@@ -413,5 +446,13 @@ function restartTest() {
 
 
     </script>
+<div id="popup-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center;">
+    <div style="background: white; padding: 20px; border-radius: 10px; max-width: 90%; text-align: center;">
+        <h3 id="modal-question" style="margin-bottom: 10px;">Question</h3>
+        <p id="modal-answer" style="margin-bottom: 20px;">Answer</p>
+        <button onclick="closeModal()">Close</button>
+    </div>
+</div>
+
 </body>
 </html>
