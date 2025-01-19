@@ -58,7 +58,6 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             display: none;
-        }
         .summary {
             margin-top: 20px;
             padding: 20px;
@@ -67,7 +66,10 @@
             background-color: #f9f9f9;
         }
         .correct { color: green; }
-        .incorrect { color: red; cursor: pointer; text-decoration: underline; }
+        }
+<li class="incorrect" onclick="viewIncorrect(${i})">${q.question}</li>
+
+
     </style>
 </head>
 <body>
@@ -84,6 +86,29 @@
         <button onclick="startRandomTestAllPushpa()">Random Test for All Pushpa</button>
     </div>
 
+    <div id="choose-mode-page" style="display: none;">
+        <div class="title">Choose Mode</div>
+        <button onclick="startPracticeMode()">Practice Mode</button>
+        <button onclick="startRandomTestForPushpa()">Random Test for This Pushpa</button>
+        <button onclick="returnToMain()">Go Back to Main Page</button>
+    </div>
+
+    <div id="practice-page" style="display: none;">
+        <div class="title">Practice Mode</div>
+        <div id="question-display" class="card">
+            <h3 id="question-text">Question will appear here</h3>
+            <button onclick="showHint(1)">Show Hint 1</button>
+            <div id="hint1" class="hint">Hint 1 content</div>
+            <button onclick="showHint(2)">Show Hint 2</button>
+            <div id="hint2" class="hint">Hint 2 content</div>
+            <button onclick="showAnswer()">Show Answer</button>
+            <div id="answer" class="hint">Answer content</div>
+        </div>
+        <button onclick="prevQuestion()">Previous</button>
+        <button onclick="nextQuestion()">Next</button>
+        <button onclick="returnToMain()">Go Back to Main Page</button>
+    </div>
+
     <div id="random-test-page" style="display: none;">
         <div class="title">Random Test</div>
         <div id="random-question-display" class="card">
@@ -96,8 +121,10 @@
         <button onclick="markCorrect()">Correct</button>
         <button onclick="markIncorrect()">Wrong</button>
         <button onclick="nextRandomQuestion()">Next Question</button>
+        <button onclick="endRandomTest()">End Test</button>
         <button onclick="returnToMain()">Go to Main Page</button>
     </div>
+
 
     <div id="summary-page" style="display: none;">
         <div class="title">Test Summary</div>
@@ -105,7 +132,6 @@
         <button onclick="restartTest()">Restart Test</button>
         <button onclick="returnToMain()">Go to Main Page</button>
     </div>
-
 
     <script>
         const data = {
@@ -128,33 +154,75 @@
             ]
         };
 
+        let currentQuestions = [];
+        let currentIndex = 0;
         let remainingQuestions = [];
         let incorrectQuestions = [];
         let correctAnswers = 0;
         let currentQuestion = null;
 
-        // Choose a specific Pushpa
         function choosePushpa(pushpaId) {
-            remainingQuestions = [...data[pushpaId]];
+            currentQuestions = [...data[pushpaId]];
+            remainingQuestions = [...data[pushpaId]].slice(0, 5); // Limit random test to 5 questions
+            currentIndex = 0;
+            document.getElementById("main-page").style.display = "none";
+            document.getElementById("choose-mode-page").style.display = "block";
+        }
+
+        function startPracticeMode() {
+            document.getElementById("choose-mode-page").style.display = "none";
+            document.getElementById("practice-page").style.display = "block";
+            loadPracticeQuestion();
+        }
+
+        function loadPracticeQuestion() {
+            const question = currentQuestions[currentIndex];
+            document.getElementById("question-text").innerText = question.question;
+            document.getElementById("hint1").innerText = question.hint1;
+            document.getElementById("hint2").innerText = question.hint2;
+            document.getElementById("answer").innerHTML = question.answer;
+
+            document.getElementById("hint1").style.display = "none";
+            document.getElementById("hint2").style.display = "none";
+            document.getElementById("answer").style.display = "none";
+        }
+
+        function showHint(hintNum) {
+            document.getElementById(`hint${hintNum}`).style.display = "block";
+        }
+
+        function showAnswer() {
+            document.getElementById("answer").style.display = "block";
+        }
+
+        function nextQuestion() {
+            currentIndex = (currentIndex + 1) % currentQuestions.length;
+            loadPracticeQuestion();
+        }
+
+        function prevQuestion() {
+            currentIndex = (currentIndex - 1 + currentQuestions.length) % currentQuestions.length;
+            loadPracticeQuestion();
+        }
+
+        function startRandomTestForPushpa() {
+            document.getElementById("choose-mode-page").style.display = "none";
             startRandomTest();
         }
 
-        // Start random test for all Pushpa
         function startRandomTestAllPushpa() {
-            remainingQuestions = Object.values(data).flat();
+            remainingQuestions = Object.values(data).flat().slice(0, 20); // Limit random test to 20 questions
             startRandomTest();
         }
 
-        // Start random test
         function startRandomTest() {
             incorrectQuestions = [];
             correctAnswers = 0;
-            document.getElementById("main-page").style.display = "none";
+            document.getElementById("practice-page").style.display = "none";
             document.getElementById("random-test-page").style.display = "block";
             nextRandomQuestion();
         }
 
-        // Load the next random question
         function nextRandomQuestion() {
             if (remainingQuestions.length === 0) {
                 endRandomTest();
@@ -172,66 +240,67 @@
             document.getElementById("random-answer").style.display = "none";
         }
 
-        // Show hint
         function showRandomHint() {
             document.getElementById("random-hint").style.display = "block";
         }
 
-        // Show answer
         function showRandomAnswer() {
             document.getElementById("random-answer").style.display = "block";
         }
 
-        // Mark question as correct
         function markCorrect() {
             correctAnswers++;
             nextRandomQuestion();
         }
 
-        // Mark question as incorrect
         function markIncorrect() {
             incorrectQuestions.push(currentQuestion);
             nextRandomQuestion();
         }
 
-        // End the random test and show summary
-        function endRandomTest() {
-            document.getElementById("random-test-page").style.display = "none";
-            document.getElementById("summary-page").style.display = "block";
+function endRandomTest() {
+    document.getElementById("random-test-page").style.display = "none";
+    document.getElementById("summary-page").style.display = "block";
 
-            const summaryDiv = document.getElementById("summary");
-            summaryDiv.innerHTML = `
-                <p class="correct">Correct Answers: ${correctAnswers}</p>
-                <p class="incorrect">Incorrect Questions:</p>
-                <ul>
-                    ${incorrectQuestions
-                        .map(
-                            (q, i) =>
-                                `<li class="incorrect" onclick="viewIncorrect(${i})">${q.question}</li>`
-                        )
-                        .join("")}
-                </ul>
-            `;
-        }
+    const summaryDiv = document.getElementById("summary");
+    summaryDiv.innerHTML = `
+        <p class="correct">Correct Answers: ${correctAnswers}</p>
+        <p class="incorrect">Incorrect Questions:</p>
+        <ul style="list-style-type: none; padding: 0;">
+            ${incorrectQuestions
+                .map(
+                    (q, i) =>
+                        `<li class="incorrect" style="color: red; text-decoration: underline; cursor: pointer;" onclick="viewIncorrect(${i})">${q.question}</li>`
+                )
+                .join("")}
+        </ul>
+    `;
+}
 
-        // View an incorrect question with its answer
-        function viewIncorrect(index) {
-            const question = incorrectQuestions[index];
-            alert(`Question: ${question.question}\nAnswer: ${question.answer}`);
-        }
+function viewIncorrect(index) {
+    const question = incorrectQuestions[index];
+    alert(`Question: ${question.question}\nAnswer: ${question.answer.replace(/<br>/g, '\n').replace(/<[^>]+>/g, '')}`);
+}
 
-        // Return to the main page
-        function returnToMain() {
-            document.getElementById("random-test-page").style.display = "none";
-            document.getElementById("summary-page").style.display = "none";
-            document.getElementById("main-page").style.display = "block";
-        }
 
-        // Restart the test
-        function restartTest() {
-            document.getElementById("summary-page").style.display = "none";
-            document.getElementById("main-page").style.display = "block";
-        }
+function returnToMain() {
+    document.getElementById("random-test-page").style.display = "none";
+    document.getElementById("summary-page").style.display = "none";
+    document.getElementById("main-page").style.display = "block";
+
+    // Clear the summary content to prevent it from appearing on the main page
+    document.getElementById("summary").innerHTML = "";
+}
+
+
+function restartTest() {
+    document.getElementById("summary-page").style.display = "none";
+    document.getElementById("main-page").style.display = "block";
+
+    // Clear the summary content
+    document.getElementById("summary").innerHTML = "";
+}
+
     </script>
 </body>
 </html>
