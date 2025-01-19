@@ -16,9 +16,10 @@
     }
 
 .title {
-    font-size: 2.5em;
+    font-size: 2.5rem; /* Adjust font size as needed */
     font-weight: bold;
-    color: orange;
+    color: black; /* Simple black text */
+    text-align: center;
     margin-bottom: 20px;
     position: relative;
     display: inline-block;
@@ -29,8 +30,8 @@
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -5px; /* Adjust for spacing below the text */
-    border-bottom: 3px double black; /* Double underline effect */
+    bottom: -5px; /* Adjust distance from text */
+    border-bottom: 3px double black; /* Double underline */
     width: 100%;
 }
 
@@ -46,7 +47,13 @@
     .subtitle {
         font-size: clamp(1.2rem, 2vw, 1.5rem); /* Responsive subtitle font */
         margin-bottom: 20px;
+	border-bottom: 1px solid #5e2323;
+position: relative;
+width:100%
     }
+
+
+
 
     .section {
         display: grid;
@@ -54,6 +61,7 @@
         gap: 10px;
         justify-items: center;
         margin-bottom: 20px;
+
     }
 
     .card {
@@ -65,27 +73,33 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-button {
-    margin-top: 10px;
-    padding: 15px 20px; /* Increase padding for larger buttons */
-    font-size: 1.2rem; /* Larger font size */
-    border: none;
-    border-radius: 5px;
-    background-color: #007BFF;
-    color: white;
-    cursor: pointer;
-    text-align: center;
-    max-width: 250px; /* Prevent buttons from becoming too wide */
+.text-button {
+    font-size: 1.2rem; /* Adjust font size for buttons */
+    color: #843232; /* Button text color */
+    text-decoration: none; /* Remove default underline */
+    border: none; /* Remove borders */
+    background: none; /* Remove background color */
+    padding: 0; /* Remove padding */
+    cursor: pointer; /* Pointer cursor for interactivity */
+    position: relative;
+    display: inline-block;
+
 }
 
-button:hover {
-    background-color: #0056b3;
+.text-button::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px; /* Adjust distance from text */
+    width: 100%;
+	border-bottom: 1px solid #5e2323; /* Darker underline on hover *
 }
 
-
-button:hover {
-    background-color: #0056b3;
+.text-button:hover::after {
+    border-bottom: 2px double gray; /* Change underline color on hover */
 }
+
 
 /* Center align buttons */
 .section button {
@@ -192,6 +206,7 @@ button:hover {
 
         .subtitle {
             font-size: 1rem;
+
         }
 
         button {
@@ -208,13 +223,13 @@ button:hover {
 <body>
     <div id="main-page">
         <div class="title">અધિવેશન ૨૦૨૫</div>
-        <h2 class="subtitle">Select Pushpa</h2>
+        <h2 class="subtitle">Select પુષ્પ</h2>
         <div id="pushpa-selection" class="section">
-            <button onclick="choosePushpa(1)">પુષ્પ ૧</button>
-            <button onclick="choosePushpa(2)"> પુષ્પ ૨</button>
-            <button onclick="choosePushpa(3)"> પુષ્પ ૩</button>
-            <button onclick="choosePushpa(4)"> પુષ્પ ૪</button>
-            <button onclick="choosePushpa(5)"> પુષ્પ ૫</button>
+            <button class="text-button" onclick="choosePushpa(1)">પુષ્પ ૧</button>
+            <button class="text-button" onclick="choosePushpa(2)"> પુષ્પ ૨</button>
+            <button class="text-button" onclick="choosePushpa(3)"> પુષ્પ ૩</button>
+            <button class="text-button" onclick="choosePushpa(4)"> પુષ્પ ૪</button>
+            <button class="text-button" onclick="choosePushpa(5)"> પુષ્પ ૫</button>
         </div>
         <button onclick="startRandomTestAllPushpa()">Random Test for All Pushpa</button>
     </div>
@@ -222,8 +237,8 @@ button:hover {
 <div id="choose-mode-page" style="display: none;">
     <div class="title">Choose Mode</div>
     <div class="mode-buttons">
-        <button onclick="startPracticeMode()">Practice Mode</button>
-        <button onclick="startRandomTestForPushpa()">Random Test for This Pushpa</button>
+        <button onclick="startPracticeMode()">મુખપાઠ તૈયારી</button>
+        <button onclick="startRandomTestForPushpa()">આ પુષ્પ ની Test</button>
         <button onclick="returnToMain()">Go Back to Main Page</button>
     </div>
 </div>
@@ -279,7 +294,7 @@ button:hover {
                 { question: "એવા સર્વોપરી જે", hint1: "પુરષોત્તમ ભગવાન તે જ દયાએ કરીને", hint2: "...તેના સ્વરૂપમાં ને અક્ષરધામને વિષે રહ્યા જે...", answer: "એવા સર્વોપરી જે પુરષોત્તમ ભગવાન તે જ દયાએ કરીને જીવોના કલ્યાણને અર્થે આ પૃથ્વીને વિષે પ્રકટ થયા થકા સર્વ જનના નયનગોચર વર્તે છે ને તમારા ઇષ્ટદેવ છે ને તમારી સેવાને અંગીકાર કરે છે. અને એવા જે એ પ્રત્યક્ષ પુરુષોત્તમ ભગવાન તેના સ્વરૂપમાં ને અક્ષરધામને વિષે રહ્યા જે ભગવાન તેના સ્વરૂપમાં કાંઈ પણ ભેદ નથી; એ બે એક જ છે. અને એવા જે આ પ્રત્યક્ષ પુરૂષોત્તમ ભગવાન તે અક્ષરાદિક સર્વના નિયંતા છે, ઈશ્વરના પણ ઈશ્વર છે ને સર્વ કારણના પણ કારણ છે ને સર્વોપરી વર્તે છે ને સર્વ અવતારના અવતારી છે ને તમારે સર્વેને એકાંતિકભાવે કરીને ઉપાસના કરવા યોગ્ય છે. <b>(ગઢડા અંત્ય ૩૮: સંખ્યાદિકનું, સદાય સુખિયાનું)</b>" },
                 { question: "..એ બ્રહ્મ જે", hint1: "તે પ્રકૃતિપુરુષ આદિક સર્વેના", hint2: "...પોતાના જીવાત્માને એ બ્રહ્મ સંગાથે...", answer: "...એ બ્રહ્મ જે તે પ્રકૃતિપુરુષ આદિક સર્વેના કારણ છે ને આધાર છે ને સર્વને વિષે અંતર્યામી શક્તિએ કરીને વ્યાપક છે...અને એ બ્રહ્મ થકી પરબ્રહ્મ જે પુરુષોત્તમ નારાયણ તે નોખા છે ને કે બ્રહ્મના પણ કારણ છે ને આધાર છે ને પ્રેરક છે, એમ સમજીને પોતાના જીવાત્માને એ બ્રહ્મ સંગાથે એકતા કરીને પરબ્રહ્મની સ્વામી-સેવકભાવે ઉપાસના કરવી. એવી રીતે સમજે ત્યારે બ્રહ્મજ્ઞાન છે તે પણ પરમ પદને પામ્યાનો નિર્વિઘ્ન માર્ગ છે. <b>(ગઢડા મધ્ય ૩: રસિકમાર્ગ અને આત્મજ્ઞાનનું)</b>" },
                 { question: "ભગવાનની ઉપાસનાનું બળ હોય", hint1: "તેને મહાપ્રલય જેવું દુઃખ", hint2: "દેહ તો પડી જાશે ને", answer: "ભગવાનની ઉપાસનાનું બળ હોય તેને મહાપ્રલય જેવું દુઃખ આવી પડે તો પણ એમ સમજે જે, 'દેહ તો પડી જાશે ને આપણે ભગવાનના ધામમાં જાશું' એમ સમજીને સુખિયો રહે. <b>(સ્વામીની વાત: ૧/૫૬)</b>" },
-                { question: "ગુણાતીતોક્ષરં બ્રહ્મ", hint1: "ગુણાતીતાનંદ સ્વામી મૂળ", hint2: "...તે ભવબંધનથી મુક્ત થાય છે", answer: "<b>ગુણાતીતોક્ષરં બ્રહ્મ ભગવાન્ પુરુષોત્તમ:| <br>જનો જાનન્નિંદ સત્યં મુચ્યતે ભવ-બંધનાત ||</b> <br>ગુણાતીતાનંદ સ્વામી મૂળ અક્ષરબ્રહ્મ છે. <br>ભગવાન પુરુષોતમનારાયણ શ્રીજીમહારાજ છે. જે જન આ સત્ય સિદ્ધાંત જાણે-સમજે છે તે ભવબંધનથી મુક્ત થાય છે. <b>(શ્લોક)</b>" }
+                { question: "ગુણાતીતોક્ષરં બ્રહ્મ", hint1: "ગુણાતીતાનંદ સ્વામી મૂળ", hint2: "...તે ભવબંધનથી મુક્ત થાય છે", answer: "<b>ગુણાતીતોક્ષરં બ્રહ્મ ભગવાન્ પુરુષોત્તમ:| <br>જનો જાનન્નિંદ સત્યં મુચ્યતે ભવ-બંધનાત ||</b> <br>ગુણાતીતાનંદ સ્વામી મૂળ અક્ષરબ્રહ્મ છે. <br>ભગવાન પુરુષોતમનારાયણ શ્રીજીમહારાજ છે. <br>જે જન આ સત્ય સિદ્ધાંત જાણે-સમજે છે તે ભવબંધનથી મુક્ત થાય છે. <b>(શ્લોક)</b>" }
             ],
 			2: [
                 { question: "ભગવાનનો જે દ્રઢ આશરો", hint1: "એ જ એક સર્વ સાધનમાં મોટું સાધન છે", hint2: "...તે આશરો અતિ દૃઢ જોઈએ...", answer: "ભગવાનનો જે દ્રઢ આશરો એ જ એક સર્વ સાધનમાં મોટું સાધન છે, તેણે કરીને ભગવાન રાજી થાય છે. અને તે આશરો અતિ દૃઢ જોઈએ, જેને વિષે  કાંઈ પોલ રહે નહીં. <b>(ગઢડા પ્રથમ ૩૩: મૂઢપણું, પ્રીતિ ને સમજણનું)</b>" },
