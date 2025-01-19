@@ -96,7 +96,6 @@
         <button onclick="markCorrect()">Correct</button>
         <button onclick="markIncorrect()">Wrong</button>
         <button onclick="nextRandomQuestion()">Next Question</button>
-        <button onclick="endRandomTest()">End Test</button>
         <button onclick="returnToMain()">Go to Main Page</button>
     </div>
 
@@ -106,6 +105,7 @@
         <button onclick="restartTest()">Restart Test</button>
         <button onclick="returnToMain()">Go to Main Page</button>
     </div>
+
 
     <script>
         const data = {
@@ -128,20 +128,20 @@
             ]
         };
 
-       let remainingQuestions = [];
+        let remainingQuestions = [];
         let incorrectQuestions = [];
         let correctAnswers = 0;
         let currentQuestion = null;
 
         // Choose a specific Pushpa
         function choosePushpa(pushpaId) {
-            remainingQuestions = [...data[pushpaId]].slice(0, 5); // Limit to 5 questions
+            remainingQuestions = [...data[pushpaId]];
             startRandomTest();
         }
 
         // Start random test for all Pushpa
         function startRandomTestAllPushpa() {
-            remainingQuestions = Object.values(data).flat().slice(0, 20); // Limit to 20 questions
+            remainingQuestions = Object.values(data).flat();
             startRandomTest();
         }
 
@@ -217,8 +217,7 @@
         // View an incorrect question with its answer
         function viewIncorrect(index) {
             const question = incorrectQuestions[index];
-            const formattedAnswer = question.answer.replace(/<br>/g, '\n').replace(/<[^>]+>/g, ''); // Ensure proper popup rendering
-            alert(`Question: ${question.question}\nAnswer: ${formattedAnswer}`);
+            alert(`Question: ${question.question}\nAnswer: ${question.answer}`);
         }
 
         // Return to the main page
