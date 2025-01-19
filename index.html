@@ -121,6 +121,27 @@ button:hover {
     }
 }
 
+.hint {
+    transition: opacity 0.3s ease; /* Smooth fade-in/out effect */
+    opacity: 0; /* Fully transparent by default */
+    display: none; /* Hidden by default */
+}
+
+.hint[style*="display: block"] {
+    opacity: 1; /* Fully visible when shown */
+}
+
+
+.answer {
+    transition: opacity 0.3s ease; /* Smooth fade-in/out effect */
+    opacity: 0; /* Fully transparent by default */
+    display: none; /* Hidden by default */
+}
+
+.answer[style*="display: block"] {
+    opacity: 1; /* Fully visible when shown */
+}
+
     .summary {
         margin-top: 20px;
         padding: 20px;
@@ -212,12 +233,15 @@ button:hover {
         <div class="title">Practice Mukhpath</div>
         <div id="question-display" class="card">
             <h3 id="question-text">Question will appear here</h3>
-            <button onclick="showHint(1)">Show Hint 1</button>
-            <div id="hint1" class="hint">Hint 1 content</div>
-            <button onclick="showHint(2)">Show Hint 2</button>
-            <div id="hint2" class="hint">Hint 2 content</div>
-            <button onclick="showAnswer()">Show Answer</button>
-            <div id="answer" class="answer">Answer content</div>
+<button id="show-hint1-btn" onclick="toggleHint(1)">Show Hint 1</button>
+<div id="hint1" class="hint">Hint 1 content</div>
+
+<button id="show-hint2-btn" onclick="toggleHint(2)">Show Hint 2</button>
+<div id="hint2" class="hint">Hint 2 content</div>
+
+				<button id="show-answer-btn" onclick="toggleAnswer()">Show Answer</button>
+				<div id="answer" class="answer">Answer content</div>
+
         </div>
         <button onclick="prevQuestion()">Previous</button>
         <button onclick="nextQuestion()">Next</button>
@@ -302,13 +326,37 @@ button:hover {
             document.getElementById("answer").style.display = "none";
         }
 
-        function showHint(hintNum) {
-            document.getElementById(`hint${hintNum}`).style.display = "block";
-        }
+function toggleHint(hintNum) {
+    const hintDiv = document.getElementById(`hint${hintNum}`);
+    const button = document.querySelector(`#show-hint${hintNum}-btn`); // Select the button by its ID
 
-        function showAnswer() {
-            document.getElementById("answer").style.display = "block";
-        }
+    if (hintDiv.style.display === "block") {
+        // If the hint is visible, hide it
+        hintDiv.style.display = "none";
+        button.innerText = `Show Hint ${hintNum}`;
+    } else {
+        // If the hint is hidden, show it
+        hintDiv.style.display = "block";
+        button.innerText = `Hide Hint ${hintNum}`;
+    }
+}
+
+
+function toggleAnswer() {
+    const answerDiv = document.getElementById("answer");
+    const button = document.querySelector("#show-answer-btn"); // Select the button by its ID
+
+    if (answerDiv.style.display === "block") {
+        // If the answer is visible, hide it
+        answerDiv.style.display = "none";
+        button.innerText = "Show Answer";
+    } else {
+        // If the answer is hidden, show it
+        answerDiv.style.display = "block";
+        button.innerText = "Hide Answer";
+    }
+}
+
 
         function nextQuestion() {
             currentIndex = (currentIndex + 1) % currentQuestions.length;
