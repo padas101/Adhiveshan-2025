@@ -3,98 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adhiveshan 2025</title>
+    <title>અધિવેશન ૨૦૨૫</title>
+<p class="disclaimer">
+    This is an unofficial page created for personal use. Feel free to use it if it helps with your Mukhpath.
+</p>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-        .title {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: orange;
-            margin-bottom: 20px;
-        }
-        .subtitle {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 20px;
+    }
+
+    .title {
+        font-size: clamp(1.8rem, 2.5vw, 2.5rem); /* Responsive font size */
+        font-weight: bold;
+        color: orange;
+        margin-bottom: 20px;
+    }
+
+    .subtitle {
+        font-size: clamp(1.2rem, 2vw, 1.5rem); /* Responsive subtitle font */
+        margin-bottom: 20px;
+    }
+
+    .section {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr); /* Default: 5 columns */
+        gap: 10px;
+        justify-items: center;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        max-width: 400px;
+        margin: auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    font-size: 1rem; /* Responsive font size */
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    width: auto; /* Default width adapts to content */
+    max-width: 200px; /* Prevent excessively wide buttons */
+    min-width: 100px; /* Ensure minimum button size */
+    text-align: center;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Center align buttons */
+.section button {
+    justify-self: center;
+}
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .yellow-button {
+        background-color: orange;
+        color: black;
+    }
+
+    .hint {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        display: none;
+    }
+
+    .summary {
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+
+    .correct {
+        color: green;
+    }
+
+    .incorrect {
+        color: red;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
         .section {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            justify-items: center;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns for medium screens */
         }
-        .card {
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 20px;
-            max-width: 400px;
-            margin: auto;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
+        .section {
+            grid-template-columns: repeat(3, 1fr); /* 3 columns for smaller screens */
         }
+
         button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #007BFF;
-            color: white;
-            cursor: pointer;
+            font-size: 0.9rem; /* Smaller font size */
         }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .yellow-button {
-            background-color: orange;
-            color: black;
-        }
-        .hint {
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            display: none;
-        .summary {
-            margin-top: 20px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            background-color: #f9f9f9;
-        }
-        .correct { color: green; }
-        }
-<li class="incorrect" onclick="viewIncorrect(${i})">${q.question}</li>
 
+        .card {
+            max-width: 300px; /* Reduce card size */
+        }
+    }
 
-    </style>
+    @media (max-width: 480px) {
+        .section {
+            grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile screens */
+        }
+
+        .title {
+            font-size: 1.5rem;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+        }
+
+        button {
+            font-size: 0.8rem;
+        }
+
+        .card {
+            max-width: 100%; /* Full width for mobile */
+        }
+    }
+</style>
+
 </head>
 <body>
     <div id="main-page">
-        <div class="title">Adhiveshan 2025</div>
+        <div class="title">અધિવેશન ૨૦૨૫</div>
         <h2 class="subtitle">Select Pushpa</h2>
         <div id="pushpa-selection" class="section">
-            <button onclick="choosePushpa(1)">Pushpa 1</button>
-            <button onclick="choosePushpa(2)">Pushpa 2</button>
-            <button onclick="choosePushpa(3)">Pushpa 3</button>
-            <button onclick="choosePushpa(4)">Pushpa 4</button>
-            <button onclick="choosePushpa(5)">Pushpa 5</button>
+            <button onclick="choosePushpa(1)">પુષ્પ ૧</button>
+            <button onclick="choosePushpa(2)"> પુષ્પ ૨</button>
+            <button onclick="choosePushpa(3)"> પુષ્પ ૩</button>
+            <button onclick="choosePushpa(4)"> પુષ્પ ૪</button>
+            <button onclick="choosePushpa(5)"> પુષ્પ ૫</button>
         </div>
         <button onclick="startRandomTestAllPushpa()">Random Test for All Pushpa</button>
     </div>
 
     <div id="choose-mode-page" style="display: none;">
         <div class="title">Choose Mode</div>
-        <button onclick="startPracticeMode()">Practice Mode</button>
-        <button onclick="startRandomTestForPushpa()">Random Test for This Pushpa</button>
+        <button onclick="startPracticeMode()">Practice Mukhpath</button>
+        <button onclick="startRandomTestForPushpa()">Test this Pushpa</button>
         <button onclick="returnToMain()">Go Back to Main Page</button>
     </div>
 
     <div id="practice-page" style="display: none;">
-        <div class="title">Practice Mode</div>
+        <div class="title">Practice Mukhpath</div>
         <div id="question-display" class="card">
             <h3 id="question-text">Question will appear here</h3>
             <button onclick="showHint(1)">Show Hint 1</button>
@@ -210,9 +288,21 @@
             startRandomTest();
         }
 
-        function startRandomTestAllPushpa() {
-            remainingQuestions = Object.values(data).flat().slice(0, 20); // Limit random test to 20 questions
-            startRandomTest();
+function startRandomTestAllPushpa() {
+    // Prepare questions for all Pushpa
+    remainingQuestions = Object.values(data).flat().slice(0, 20); // Limit random test to 20 questions
+    incorrectQuestions = [];
+    correctAnswers = 0;
+
+    // Hide the main page
+    document.getElementById("main-page").style.display = "none";
+
+    // Show the random test page
+    document.getElementById("random-test-page").style.display = "block";
+
+    // Start with the first random question
+    nextRandomQuestion();
+
         }
 
         function startRandomTest() {
@@ -284,22 +374,43 @@ function viewIncorrect(index) {
 
 
 function returnToMain() {
+    // Hide all pages
+    document.getElementById("practice-page").style.display = "none";
     document.getElementById("random-test-page").style.display = "none";
     document.getElementById("summary-page").style.display = "none";
-    document.getElementById("main-page").style.display = "block";
+    document.getElementById("choose-mode-page").style.display = "none";
 
     // Clear the summary content to prevent it from appearing on the main page
     document.getElementById("summary").innerHTML = "";
+
+    // Show the main page
+    document.getElementById("main-page").style.display = "block";
+
+    // Reset other components if needed (optional)
+    currentQuestions = [];
+    currentIndex = 0;
+    remainingQuestions = [];
+    incorrectQuestions = [];
+    correctAnswers = 0;
+    currentQuestion = null;
+
 }
 
 
 function restartTest() {
-    document.getElementById("summary-page").style.display = "none";
-    document.getElementById("main-page").style.display = "block";
+    // Reset variables for the current Pushpa's test
+    incorrectQuestions = [];
+    correctAnswers = 0;
+    remainingQuestions = [...currentQuestions]; // Reload questions for the same Pushpa
 
-    // Clear the summary content
-    document.getElementById("summary").innerHTML = "";
+    // Restart the random test page
+    document.getElementById("summary-page").style.display = "none";
+    document.getElementById("random-test-page").style.display = "block";
+
+    // Start with the first question
+    nextRandomQuestion();
 }
+
 
     </script>
 </body>
