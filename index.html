@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adhiveshan 2025</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .title {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: orange;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .section {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            justify-items: center;
+            margin-bottom: 20px;
+        }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .yellow-button {
+            background-color: orange;
+            color: black;
+        }
+        .hint {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: none;
+        }
+        .summary {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .correct { color: green; }
+        .incorrect { color: red; cursor: pointer; text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div id="main-page">
+        <div class="title">Adhiveshan 2025</div>
+        <h2 class="subtitle">Select Pushpa</h2>
+        <div id="pushpa-selection" class="section">
+            <button onclick="choosePushpa(1)">Pushpa 1</button>
+            <button onclick="choosePushpa(2)">Pushpa 2</button>
+            <button onclick="choosePushpa(3)">Pushpa 3</button>
+            <button onclick="choosePushpa(4)">Pushpa 4</button>
+            <button onclick="choosePushpa(5)">Pushpa 5</button>
+        </div>
+        <button onclick="startRandomTestAllPushpa()">Random Test for All Pushpa</button>
+    </div>
+
+    <div id="random-test-page" style="display: none;">
+        <div class="title">Random Test</div>
+        <div id="random-question-display" class="card">
+            <h3 id="random-question-text">Random Question</h3>
+            <button onclick="showRandomHint()">Show Hint</button>
+            <div id="random-hint" class="hint">Hint</div>
+            <button onclick="showRandomAnswer()">Show Answer</button>
+            <div id="random-answer" class="hint">Answer</div>
+        </div>
+        <button onclick="markCorrect()">Correct</button>
+        <button onclick="markIncorrect()">Wrong</button>
+        <button onclick="nextRandomQuestion()">Next Question</button>
+        <button onclick="endRandomTest()">End Test</button>
+        <button onclick="returnToMain()">Go to Main Page</button>
+    </div>
+
+    <div id="summary-page" style="display: none;">
+        <div class="title">Test Summary</div>
+        <div id="summary" class="summary"></div>
+        <button onclick="restartTest()">Restart Test</button>
+        <button onclick="returnToMain()">Go to Main Page</button>
+    </div>
+
+    <script>
+        const data = {
+            1: [
+                                { question: "કેટલાક સિદ્ધ થાય છે", hint1: "ને કેટલાક સર્વજ્ઞ થાય છે", hint2: "...ઉપાસનાને બળે પામે છે..", answer: "કેટલાક સિદ્ધ થાય છે ને કેટલાક સર્વજ્ઞ થાય છે ને કેટલાક દેવતા થાય છે ઇત્યાદિક અનંત પ્રકારની મોટ્યપ પામે છે તથા પરમ પદને પામે છે એ સર્વે ભગવાનની ઉપાસનાને બળે પામે છે, પણ ઉપાસના વિના કોઈ વાત સિદ્ધ થતી નથી. <b>(ગઢડા પ્રથમ ૫૬: પોલા પાણાનું)</b>" },
+                { question: "એવા સર્વોપરી જે", hint1: "પુરષોત્તમ ભગવાન તે જ દયાએ કરીને", hint2: "...તેના સ્વરૂપમાં ને અક્ષરધામને વિષે રહ્યા જે...", answer: "એવા સર્વોપરી જે પુરષોત્તમ ભગવાન તે જ દયાએ કરીને જીવોના કલ્યાણને અર્થે આ પૃથ્વીને વિષે પ્રકટ થયા થકા સર્વ જનના નયનગોચર વર્તે છે ને તમારા ઇષ્ટદેવ છે ને તમારી સેવાને અંગીકાર કરે છે. અને એવા જે એ પ્રત્યક્ષ પુરુષોત્તમ ભગવાન તેના સ્વરૂપમાં ને અક્ષરધામને વિષે રહ્યા જે ભગવાન તેના સ્વરૂપમાં કાંઈ પણ ભેદ નથી; એ બે એક જ છે. અને એવા જે આ પ્રત્યક્ષ પુરૂષોત્તમ ભગવાન તે અક્ષરાદિક સર્વના નિયંતા છે, ઈશ્વરના પણ ઈશ્વર છે ને સર્વ કારણના પણ કારણ છે ને સર્વોપરી વર્તે છે ને સર્વ અવતારના અવતારી છે ને તમારે સર્વેને એકાંતિકભાવે કરીને ઉપાસના કરવા યોગ્ય છે. <b>(ગઢડા અંત્ય ૩૮: સંખ્યાદિકનું, સદાય સુખિયાનું)</b>" },
+                { question: "..એ બ્રહ્મ જે", hint1: "તે પ્રકૃતિપુરુષ આદિક સર્વેના", hint2: "...પોતાના જીવાત્માને એ બ્રહ્મ સંગાથે...", answer: "...એ બ્રહ્મ જે તે પ્રકૃતિપુરુષ આદિક સર્વેના કારણ છે ને આધાર છે ને સર્વને વિષે અંતર્યામી શક્તિએ કરીને વ્યાપક છે...અને એ બ્રહ્મ થકી પરબ્રહ્મ જે પુરુષોત્તમ નારાયણ તે નોખા છે ને કે બ્રહ્મના પણ કારણ છે ને આધાર છે ને પ્રેરક છે, એમ સમજીને પોતાના જીવાત્માને એ બ્રહ્મ સંગાથે એકતા કરીને પરબ્રહ્મની સ્વામી-સેવકભાવે ઉપાસના કરવી. એવી રીતે સમજે ત્યારે બ્રહ્મજ્ઞાન છે તે પણ પરમ પદને પામ્યાનો નિર્વિઘ્ન માર્ગ છે. <b>(ગઢડા મધ્ય ૩: રસિકમાર્ગ અને આત્મજ્ઞાનનું)</b>" },
+                { question: "ભગવાનની ઉપાસનાનું બળ હોય", hint1: "તેને મહાપ્રલય જેવું દુઃખ", hint2: "દેહ તો પડી જાશે ને", answer: "ભગવાનની ઉપાસનાનું બળ હોય તેને મહાપ્રલય જેવું દુઃખ આવી પડે તો પણ એમ સમજે જે, 'દેહ તો પડી જાશે ને આપણે ભગવાનના ધામમાં જાશું' એમ સમજીને સુખિયો રહે. <b>(સ્વામીની વાત: ૧/૫૬)</b>" },
+                { question: "ગુણાતીતોક્ષરં બ્રહ્મ", hint1: "ગુણાતીતાનંદ સ્વામી મૂળ", hint2: "...તે ભવબંધનથી મુક્ત થાય છે", answer: "<b>ગુણાતીતોક્ષરં બ્રહ્મ ભગવાન્ પુરુષોત્તમ:| <br>જનો જાનન્નિંદ સત્યં મુચ્યતે ભવ-બંધનાત ||</b> <br>ગુણાતીતાનંદ સ્વામી મૂળ અક્ષરબ્રહ્મ છે. <br>ભગવાન પુરુષોતમનારાયણ શ્રીજીમહારાજ છે. જે જન આ સત્ય સિદ્ધાંત જાણે-સમજે છે તે ભવબંધનથી મુક્ત થાય છે. <b>(શ્લોક)</b>" }
+            ],
+			2: [
+                { question: "ભગવાનનો જે દ્રઢ આશરો", hint1: "એ જ એક સર્વ સાધનમાં મોટું સાધન છે", hint2: "...તે આશરો અતિ દૃઢ જોઈએ...", answer: "ભગવાનનો જે દ્રઢ આશરો એ જ એક સર્વ સાધનમાં મોટું સાધન છે, તેણે કરીને ભગવાન રાજી થાય છે. અને તે આશરો અતિ દૃઢ જોઈએ, જેને વિષે  કાંઈ પોલ રહે નહીં. <b>(ગઢડા પ્રથમ ૩૩: મૂઢપણું, પ્રીતિ ને સમજણનું)</b>" },
+                { question: "માયા તરવાનો ઉપાય એ છે જે", hint1: "જ્યારે સર્વ કર્મ અને માયા", hint2: "...અથવા તે ભગવાનના મળેલ સંત...", answer: "માયા તરવાનો ઉપાય એ છે જે, જ્યારે સર્વ કર્મ અને માયા તેનો નાશ કરનારા ને માયાથી પર જે સાક્ષાત્કાર શ્રીપુરુષોત્તમ ભગવાન અથવા તે ભગવાનના મળેલ સંત તેમની જીવને પ્રાપ્તિ જ્યારે થાય છે ત્યારે તેમના આશ્રયથી માયા ઉલ્લંઘાય છે. <b>(જેતલપુર ૧)</b>" },
+                { question: "ભગવાન અને મોટા સાધુને આશરે કરીને", hint1: "તો વાદળ જેવાં દુઃખ ", hint2: "...સાધને કરીને તો...", answer: "ભગવાન અને મોટા સાધુને આશરે કરીને તો વાદળ જેવાં દુઃખ આવવાનાં હોય તે પણ ટળી જાય ને સાધને કરીને તો ફૂટી ફૂટીને મરી જાય તો પણ ન ટળે. <b>(સ્વામીની વાત: ૧/૧૧૪)</b>" },
+                { question: "ભગવાનનો આશરો થયો છે", hint1: "તે જેવી તો કોઈ વાત", hint2: "સર્વ વાત થઈ રહી છે", answer: "ભગવાનનો આશરો થયો છે તે જેવી તો કોઈ વાત નથી, તેને તો સર્વ વાત થઈ રહી છે. કાંઈ કરવું બાકી રહ્યું નથી. <b>(સ્વામીની વાત: ૧/૧૩૯)</b>" },
+                { question: "ધન્યોસ્મિ પૂર્ણકામોસ્મિ", hint1: "નિષ્પાપો", hint2: "અક્ષરગુરુયોગેન", answer: "<b>ધન્યોસ્મિ પૂર્ણકામોસ્મિ નિષ્પાપો નિર્ભય: સુખી| <br> અક્ષરગુરુયોગેન સ્વામિનારાયણાશ્રયાત્ ॥</b> <br>અક્ષરબ્રહ્મ ગુરુના યોગે સ્વામિનારાયણ ભગવાનનો આશરો કરવાથી હું ધન્ય છું, પૂણર્કામ છું, નિષ્પાપ,નિભર્ય અને સુખી છું. <b>(સત્સંગદીક્ષા: ૧૯)</b>" },
+                { question: "મારું સ્વરૂપ તો", hint1: "માયા થકી મુક્ત ને પર", hint2: "એવું જે બ્રહ્મ તે", answer: "‘મારું સ્વરૂપ તો માયા થકી મુક્ત ને પર એવું જે બ્રહ્મ તે છે.’ એવી રીતે નિરંતર મનન કરતો સતો બ્રહ્મનો સંગ કરે તો એ બ્રહ્મનો ગુણ એ જીવને વિષે આવે. <b>(ગઢડા મધ્ય ૩૧: મનન દ્વારા બ્રહ્મનો સંગ કયાર્નું)</b>" },
+                { question: "આત્મિનષ્ઠા તો એવી રીતની", hint1: "હું ચૈતન્ય છું", hint2: "હું શુદ્ધ છું", answer: "આત્મિનષ્ઠા તો એવી રીતની જોઈએ જે, ‘હું ચૈતન્ય છું ને દેહ જડ છે, અને હું શુદ્ધ છું ને દેહ નરકરૂપ છે, અને હું અિવનાશી છું ને દેહ નાશવંત છે, અને હું આનંદરૂપ છું ને દેહ દુઃખરૂપ છે.’ એવી રીતે જ્યારે દેહ થકી પોતાના આત્માને સર્વ પ્રકારે અતિશય વિલક્ષણ સમજે, ત્યારે દેહને પોતાનું રૂપ માનીને વિષયમાં પ્રીતિ કરે જ નહીં. એવી રીતે આત્મજ્ઞાને કરીને વિષયની નિવૃત્તિ થાય છે. <b>(સારંગપુર ૧: મન જીત્યાનું)</b>" },
+                { question: "આપણો જન્મ બે વાત સાધવા ", hint1: "અક્ષરરૂપ થાવું", hint2: "...સંગ અનેક પ્રકારના...", answer: "આપણો જન્મ બે વાત સાધવા સારું થયો છે, તેમાં એક અક્ષરરૂપ થાવું, એમાં દેહ અંતરાયરૂપ છે; ને બીજું ભગવાનમાં જોડાવું, તેમાં સંગ અનેક પ્રકારના અંતરાયરૂપ છે. એ બે ખોટ ટાળવી <b>(સ્વામીની વાત: ૪/૯૯)</b>" }
+            ]
+        };
+
+       let remainingQuestions = [];
+        let incorrectQuestions = [];
+        let correctAnswers = 0;
+        let currentQuestion = null;
+
+        // Choose a specific Pushpa
+        function choosePushpa(pushpaId) {
+            remainingQuestions = [...data[pushpaId]].slice(0, 5); // Limit to 5 questions
+            startRandomTest();
+        }
+
+        // Start random test for all Pushpa
+        function startRandomTestAllPushpa() {
+            remainingQuestions = Object.values(data).flat().slice(0, 20); // Limit to 20 questions
+            startRandomTest();
+        }
+
+        // Start random test
+        function startRandomTest() {
+            incorrectQuestions = [];
+            correctAnswers = 0;
+            document.getElementById("main-page").style.display = "none";
+            document.getElementById("random-test-page").style.display = "block";
+            nextRandomQuestion();
+        }
+
+        // Load the next random question
+        function nextRandomQuestion() {
+            if (remainingQuestions.length === 0) {
+                endRandomTest();
+                return;
+            }
+
+            const randomIndex = Math.floor(Math.random() * remainingQuestions.length);
+            currentQuestion = remainingQuestions.splice(randomIndex, 1)[0];
+
+            document.getElementById("random-question-text").innerText = currentQuestion.question;
+            document.getElementById("random-hint").innerText = currentQuestion.hint1;
+            document.getElementById("random-answer").innerHTML = currentQuestion.answer;
+
+            document.getElementById("random-hint").style.display = "none";
+            document.getElementById("random-answer").style.display = "none";
+        }
+
+        // Show hint
+        function showRandomHint() {
+            document.getElementById("random-hint").style.display = "block";
+        }
+
+        // Show answer
+        function showRandomAnswer() {
+            document.getElementById("random-answer").style.display = "block";
+        }
+
+        // Mark question as correct
+        function markCorrect() {
+            correctAnswers++;
+            nextRandomQuestion();
+        }
+
+        // Mark question as incorrect
+        function markIncorrect() {
+            incorrectQuestions.push(currentQuestion);
+            nextRandomQuestion();
+        }
+
+        // End the random test and show summary
+        function endRandomTest() {
+            document.getElementById("random-test-page").style.display = "none";
+            document.getElementById("summary-page").style.display = "block";
+
+            const summaryDiv = document.getElementById("summary");
+            summaryDiv.innerHTML = `
+                <p class="correct">Correct Answers: ${correctAnswers}</p>
+                <p class="incorrect">Incorrect Questions:</p>
+                <ul>
+                    ${incorrectQuestions
+                        .map(
+                            (q, i) =>
+                                `<li class="incorrect" onclick="viewIncorrect(${i})">${q.question}</li>`
+                        )
+                        .join("")}
+                </ul>
+            `;
+        }
+
+        // View an incorrect question with its answer
+        function viewIncorrect(index) {
+            const question = incorrectQuestions[index];
+            const formattedAnswer = question.answer.replace(/<br>/g, '\n').replace(/<[^>]+>/g, ''); // Ensure proper popup rendering
+            alert(`Question: ${question.question}\nAnswer: ${formattedAnswer}`);
+        }
+
+        // Return to the main page
+        function returnToMain() {
+            document.getElementById("random-test-page").style.display = "none";
+            document.getElementById("summary-page").style.display = "none";
+            document.getElementById("main-page").style.display = "block";
+        }
+
+        // Restart the test
+        function restartTest() {
+            document.getElementById("summary-page").style.display = "none";
+            document.getElementById("main-page").style.display = "block";
+        }
+    </script>
+</body>
+</html>
