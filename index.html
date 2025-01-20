@@ -35,6 +35,34 @@
     width: 100%;
 }
 
+.navigation-buttons {
+    position: fixed; /* Keeps the buttons fixed at a specific location */
+    bottom: 0; /* Aligns the buttons to the bottom of the screen */
+    left: 0;
+    width: 100%; /* Makes the button container span the full width */
+    background-color: #f9f9f9; /* Optional: Background color for visibility */
+    border-top: 1px solid #ddd; /* Optional: A border to separate buttons from content */
+    padding: 10px 0; /* Adds spacing for the buttons */
+    display: flex; /* Aligns the buttons horizontally */
+    justify-content: center; /* Centers the buttons horizontally */
+    gap: 20px; /* Adds spacing between buttons */
+    z-index: 1000; /* Ensures the buttons stay on top of other content */
+}
+
+.navigation-buttons button {
+    font-size: 1rem; /* Adjust font size for readability */
+    padding: 10px 20px; /* Adjust padding for a comfortable button size */
+    border: 1px solid black; /* Add borders for clarity */
+    background-color: white; /* Button background */
+    color: black; /* Button text color */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor for interactivity */
+}
+
+.navigation-buttons button:hover {
+    background-color: lightgray; /* Hover effect for buttons */
+}
+
 .mode-buttons {
     display: flex;
     flex-direction: column; /* Stack buttons vertically */
@@ -237,9 +265,9 @@ width:100%
 <div id="choose-mode-page" style="display: none;">
     <div class="title">Choose Mode</div>
     <div class="mode-buttons">
-        <button onclick="startPracticeMode()">મુખપાઠ તૈયારી</button>
-        <button onclick="startRandomTestForPushpa()">આ પુષ્પ ની Test</button>
-        <button onclick="returnToMain()">Go Back to Main Page</button>
+        <button class="text-button" onclick="startPracticeMode()">મુખપાઠ તૈયારી</button>
+        <button class="text-button" onclick="startRandomTestForPushpa()">આ પુષ્પ ની Test</button>
+        <button class=".hint" onclick="returnToMain()">Go Back to Main Page</button>
     </div>
 </div>
 
@@ -258,9 +286,9 @@ width:100%
 				<div id="answer" class="answer">Answer content</div>
 
         </div>
-        <button onclick="prevQuestion()">Previous</button>
-        <button onclick="nextQuestion()">Next</button>
-        <button onclick="returnToMain()">Go Back to Main Page</button>
+        <button class="arrow-btn previous-btn" onclick="prevQuestion()">Previous</button>
+        <button class="main-btn" onclick="nextQuestion()">Next</button>
+        <button class="arrow-btn next-btn" onclick="returnToMain()">Go Back to Main Page</button>
     </div>
 
     <div id="random-test-page" style="display: none;">
