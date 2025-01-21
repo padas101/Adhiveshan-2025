@@ -1,560 +1,276 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="gu">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>અધિવેશન ૨૦૨૫</title>
-<p class="disclaimer">
-    This is an unofficial page created for personal use. Feel free to use it if it helps with your Mukhpath.
-</p>
-
     <style>
-    body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        margin: 20px;
-    }
-
-.title {
-    font-size: 2.5rem; /* Adjust font size as needed */
-    font-weight: bold;
-    color: black; /* Simple black text */
-    text-align: center;
-    margin-bottom: 20px;
-    position: relative;
-    display: inline-block;
-}
-
-.title::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -5px; /* Adjust distance from text */
-    border-bottom: 3px double black; /* Double underline */
-    width: 100%;
-}
-
-.navigation-buttons {
-    position: fixed; /* Keeps the buttons fixed at a specific location */
-    bottom: 0; /* Aligns the buttons to the bottom of the screen */
-    left: 0;
-    width: 100%; /* Makes the button container span the full width */
-    background-color: #f9f9f9; /* Optional: Background color for visibility */
-    border-top: 1px solid #ddd; /* Optional: A border to separate buttons from content */
-    padding: 10px 0; /* Adds spacing for the buttons */
-    display: flex; /* Aligns the buttons horizontally */
-    justify-content: center; /* Centers the buttons horizontally */
-    gap: 20px; /* Adds spacing between buttons */
-    z-index: 1000; /* Ensures the buttons stay on top of other content */
-}
-
-.navigation-buttons button {
-    font-size: 1rem; /* Adjust font size for readability */
-    padding: 10px 20px; /* Adjust padding for a comfortable button size */
-    border: 1px solid black; /* Add borders for clarity */
-    background-color: white; /* Button background */
-    color: black; /* Button text color */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor for interactivity */
-}
-
-.navigation-buttons button:hover {
-    background-color: lightgray; /* Hover effect for buttons */
-}
-
-.mode-buttons {
-    display: flex;
-    flex-direction: column; /* Stack buttons vertically */
-    align-items: center; /* Center align the buttons */
-    gap: 15px; /* Add space between buttons */
-    margin-top: 20px;
-}
-
-
-    .subtitle {
-        font-size: clamp(1.2rem, 2vw, 1.5rem); /* Responsive subtitle font */
-        margin-bottom: 20px;
-	border-bottom: 1px solid #5e2323;
-position: relative;
-width:100%
-    }
-
-
-
-
-    .section {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr); /* Default: 5 columns */
-        gap: 10px;
-        justify-items: center;
-        margin-bottom: 20px;
-
-    }
-
-    .card {
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        padding: 20px;
-        max-width: 400px;
-        margin: auto;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-.text-button {
-    font-size: 1.2rem; /* Adjust font size for buttons */
-    color: #843232; /* Button text color */
-    text-decoration: none; /* Remove default underline */
-    border: none; /* Remove borders */
-    background: none; /* Remove background color */
-    padding: 0; /* Remove padding */
-    cursor: pointer; /* Pointer cursor for interactivity */
-    position: relative;
-    display: inline-block;
-
-}
-
-.text-button::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -1px; /* Adjust distance from text */
-    width: 100%;
-	border-bottom: 1px solid #5e2323; /* Darker underline on hover *
-}
-
-.text-button:hover::after {
-    border-bottom: 2px double gray; /* Change underline color on hover */
-}
-
-
-/* Center align buttons */
-.section button {
-    justify-self: center;
-}
-    }
-
-    button:hover {
-        background-color: #0056b3;
-    }
-
-    .yellow-button {
-        background-color: orange;
-        color: black;
-    }
-
-.hint, .answer {
-    margin-top: 10px;
-    padding: 15px; /* Consistent padding for both hints and answers */
-    background-color: #f9f9f9; /* Light gray background */
-    border: 1px solid #ddd; /* Subtle border for better separation */
-    border-radius: 5px; /* Rounded edges for a clean look */
-    font-size: 1.2rem; /* Larger default font size */
-    line-height: 1.5; /* Improved spacing for readability */
-    display: none; /* Initially hidden */
-}
-
-/* Responsive adjustments for small screens */
-@media (max-width: 480px) {
-    .hint, .answer {
-        font-size: 1.3rem; /* Increase font size further for small screens */
-        padding: 20px; /* Additional padding for touch-friendly design */
-    }
-}
-
-.hint {
-    transition: opacity 0.3s ease; /* Smooth fade-in/out effect */
-    opacity: 0; /* Fully transparent by default */
-    display: none; /* Hidden by default */
-}
-
-.hint[style*="display: block"] {
-    opacity: 1; /* Fully visible when shown */
-}
-
-
-.answer {
-    transition: opacity 0.3s ease; /* Smooth fade-in/out effect */
-    opacity: 0; /* Fully transparent by default */
-    display: none; /* Hidden by default */
-}
-
-.answer[style*="display: block"] {
-    opacity: 1; /* Fully visible when shown */
-}
-
-    .summary {
-        margin-top: 20px;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        background-color: #f9f9f9;
-    }
-
-    .correct {
-        color: green;
-    }
-
-    .incorrect {
-        color: red;
-        text-decoration: underline;
-        cursor: pointer;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 1200px) {
-        .section {
-            grid-template-columns: repeat(4, 1fr); /* 4 columns for medium screens */
-        }
-    }
-
-    @media (max-width: 768px) {
-        .section {
-            grid-template-columns: repeat(3, 1fr); /* 3 columns for smaller screens */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
-        button {
-            font-size: 0.9rem; /* Smaller font size */
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: orange;
+            margin-bottom: 20px;
         }
 
-        .card {
-            max-width: 300px; /* Reduce card size */
-        }
-    }
-
-    @media (max-width: 480px) {
-        .section {
-            grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile screens */
+        .pushpa-selection-container {
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            justify-content: center;
         }
 
-        .title {
+        .pushpa-button {
             font-size: 1.5rem;
+            padding: 15px;
+            border: 1px solid #843232;
+            background-color: white;
+            color: #843232;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        .subtitle {
-            font-size: 1rem;
-
+        .pushpa-button:hover {
+            background-color: #f5dcdc;
+            transform: scale(1.05);
         }
 
-        button {
-            font-size: 0.8rem;
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            z-index: 1000;
         }
 
-        .card {
-            max-width: 100%; /* Full width for mobile */
+        .footer button {
+            padding: 10px 20px;
+            border: 1px solid black;
+            background-color: white;
+            color: black;
+            border-radius: 5px;
+            cursor: pointer;
         }
-    }
-</style>
 
+        .footer button:hover {
+            background-color: lightgray;
+        }
+
+        .summary ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .summary li {
+            margin: 5px 0;
+        }
+
+        .summary li a {
+            color: red;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .summary li a:hover {
+            text-decoration: none;
+        }
+
+        .summary {
+            text-align: center;
+        }
+
+    </style>
 </head>
 <body>
+    <!-- Main Page -->
     <div id="main-page">
-        <div class="title">અધિવેશન ૨૦૨૫</div>
-        <h2 class="subtitle">Select પુષ્પ</h2>
-        <div id="pushpa-selection" class="section">
-            <button class="text-button" onclick="choosePushpa(1)">પુષ્પ ૧</button>
-            <button class="text-button" onclick="choosePushpa(2)"> પુષ્પ ૨</button>
-            <button class="text-button" onclick="choosePushpa(3)"> પુષ્પ ૩</button>
-            <button class="text-button" onclick="choosePushpa(4)"> પુષ્પ ૪</button>
-            <button class="text-button" onclick="choosePushpa(5)"> પુષ્પ ૫</button>
+        <h1 class="main-title">અધિવેશન ૨૦૨૫</h1>
+        <div class="pushpa-selection-container">
+            <button class="pushpa-button" onclick="startSinglePushpaTest()">Single Pushpa Test</button>
+            <button class="pushpa-button" onclick="startAllPushpaTest()">All Pushpa Test</button>
         </div>
-        <button onclick="startRandomTestAllPushpa()">Random Test for All Pushpa</button>
     </div>
 
-<div id="choose-mode-page" style="display: none;">
-    <div class="title">Choose Mode</div>
-    <div class="mode-buttons">
-        <button class="text-button" onclick="startPracticeMode()">મુખપાઠ તૈયારી</button>
-        <button class="text-button" onclick="startRandomTestForPushpa()">આ પુષ્પ ની Test</button>
-        <button class=".hint" onclick="returnToMain()">Go Back to Main Page</button>
-    </div>
-</div>
-
-
-    <div id="practice-page" style="display: none;">
-        <div class="title">Practice Mukhpath</div>
-        <div id="question-display" class="card">
-            <h3 id="question-text">Question will appear here</h3>
-<button id="show-hint1-btn" onclick="toggleHint(1)">Show Hint 1</button>
-<div id="hint1" class="hint">Hint 1 content</div>
-
-<button id="show-hint2-btn" onclick="toggleHint(2)">Show Hint 2</button>
-<div id="hint2" class="hint">Hint 2 content</div>
-
-				<button id="show-answer-btn" onclick="toggleAnswer()">Show Answer</button>
-				<div id="answer" class="answer">Answer content</div>
-
+    <!-- Pushpa Selection Page -->
+    <div id="pushpa-selection-page" style="display: none;">
+        <h2 class="main-title">Select Pushpa</h2>
+        <div class="pushpa-selection-container" id="pushpa-buttons">
+            <!-- Buttons will be dynamically created -->
         </div>
-        <button class="arrow-btn previous-btn" onclick="prevQuestion()">Previous</button>
-        <button class="main-btn" onclick="nextQuestion()">Next</button>
-        <button class="arrow-btn next-btn" onclick="returnToMain()">Go Back to Main Page</button>
-    </div>
-
-    <div id="random-test-page" style="display: none;">
-        <div class="title">Random Test</div>
-        <div id="random-question-display" class="card">
-            <h3 id="random-question-text">Random Question</h3>
-            <button onclick="showRandomHint()">Show Hint</button>
-            <div id="random-hint" class="hint">Hint</div>
-            <button onclick="showRandomAnswer()">Show Answer</button>
-            <div id="random-answer" class="hint">Answer</div>
+        <div class="footer">
+            <button onclick="goToMainPage()">Go to Main Page</button>
         </div>
-        <button onclick="markCorrect()">Correct</button>
-        <button onclick="markIncorrect()">Wrong</button>
-        <button onclick="nextRandomQuestion()">Next Question</button>
-        <button onclick="endRandomTest()">End Test</button>
-        <button onclick="returnToMain()">Go to Main Page</button>
     </div>
 
+    <!-- Question Display Page -->
+    <div id="question-container" style="display: none;">
+        <h2 id="question-text">Question will appear here</h2>
+        <div id="hint-container" style="display: none; margin: 20px; font-weight: bold;">Hint will appear here</div>
+        <div class="footer">
+            <button onclick="markCorrect()">Correct</button>
+            <button onclick="markIncorrect()">Wrong</button>
+            <button onclick="nextQuestion()">Next</button>
+            <button onclick="endTest()">End Test</button>
+            <button onclick="goToMainPage()">Go to Main Page</button>
+        </div>
+    </div>
 
-    <div id="summary-page" style="display: none;">
-        <div class="title">Test Summary</div>
-        <div id="summary" class="summary"></div>
-        <button onclick="restartTest()">Restart Test</button>
-        <button onclick="returnToMain()">Go to Main Page</button>
+    <!-- Test Summary Page -->
+    <div id="test-summary-page" style="display: none;">
+        <div class="summary">
+            <h3>Test Summary</h3>
+            <p id="correct-count">Correct Answers: 0</p>
+            <p id="incorrect-count">Incorrect Answers: 0</p>
+            <ul id="incorrect-list"></ul>
+            <div class="footer">
+                <button onclick="goToMainPage()">Go to Main Page</button>
+            </div>
+        </div>
     </div>
 
     <script>
-        const data = {
-            1: [
-                                { question: "કેટલાક સિદ્ધ થાય છે", hint1: "ને કેટલાક સર્વજ્ઞ થાય છે", hint2: "...ઉપાસનાને બળે પામે છે..", answer: "કેટલાક સિદ્ધ થાય છે ને કેટલાક સર્વજ્ઞ થાય છે ને કેટલાક દેવતા થાય છે ઇત્યાદિક અનંત પ્રકારની મોટ્યપ પામે છે તથા પરમ પદને પામે છે એ સર્વે ભગવાનની ઉપાસનાને બળે પામે છે, પણ ઉપાસના વિના કોઈ વાત સિદ્ધ થતી નથી. <b>(ગઢડા પ્રથમ ૫૬: પોલા પાણાનું)</b>" },
-                { question: "એવા સર્વોપરી જે", hint1: "પુરષોત્તમ ભગવાન તે જ દયાએ કરીને", hint2: "...તેના સ્વરૂપમાં ને અક્ષરધામને વિષે રહ્યા જે...", answer: "એવા સર્વોપરી જે પુરષોત્તમ ભગવાન તે જ દયાએ કરીને જીવોના કલ્યાણને અર્થે આ પૃથ્વીને વિષે પ્રકટ થયા થકા સર્વ જનના નયનગોચર વર્તે છે ને તમારા ઇષ્ટદેવ છે ને તમારી સેવાને અંગીકાર કરે છે. અને એવા જે એ પ્રત્યક્ષ પુરુષોત્તમ ભગવાન તેના સ્વરૂપમાં ને અક્ષરધામને વિષે રહ્યા જે ભગવાન તેના સ્વરૂપમાં કાંઈ પણ ભેદ નથી; એ બે એક જ છે. અને એવા જે આ પ્રત્યક્ષ પુરૂષોત્તમ ભગવાન તે અક્ષરાદિક સર્વના નિયંતા છે, ઈશ્વરના પણ ઈશ્વર છે ને સર્વ કારણના પણ કારણ છે ને સર્વોપરી વર્તે છે ને સર્વ અવતારના અવતારી છે ને તમારે સર્વેને એકાંતિકભાવે કરીને ઉપાસના કરવા યોગ્ય છે. <b>(ગઢડા અંત્ય ૩૮: સંખ્યાદિકનું, સદાય સુખિયાનું)</b>" },
-                { question: "..એ બ્રહ્મ જે", hint1: "તે પ્રકૃતિપુરુષ આદિક સર્વેના", hint2: "...પોતાના જીવાત્માને એ બ્રહ્મ સંગાથે...", answer: "...એ બ્રહ્મ જે તે પ્રકૃતિપુરુષ આદિક સર્વેના કારણ છે ને આધાર છે ને સર્વને વિષે અંતર્યામી શક્તિએ કરીને વ્યાપક છે...અને એ બ્રહ્મ થકી પરબ્રહ્મ જે પુરુષોત્તમ નારાયણ તે નોખા છે ને કે બ્રહ્મના પણ કારણ છે ને આધાર છે ને પ્રેરક છે, એમ સમજીને પોતાના જીવાત્માને એ બ્રહ્મ સંગાથે એકતા કરીને પરબ્રહ્મની સ્વામી-સેવકભાવે ઉપાસના કરવી. એવી રીતે સમજે ત્યારે બ્રહ્મજ્ઞાન છે તે પણ પરમ પદને પામ્યાનો નિર્વિઘ્ન માર્ગ છે. <b>(ગઢડા મધ્ય ૩: રસિકમાર્ગ અને આત્મજ્ઞાનનું)</b>" },
-                { question: "ભગવાનની ઉપાસનાનું બળ હોય", hint1: "તેને મહાપ્રલય જેવું દુઃખ", hint2: "દેહ તો પડી જાશે ને", answer: "ભગવાનની ઉપાસનાનું બળ હોય તેને મહાપ્રલય જેવું દુઃખ આવી પડે તો પણ એમ સમજે જે, 'દેહ તો પડી જાશે ને આપણે ભગવાનના ધામમાં જાશું' એમ સમજીને સુખિયો રહે. <b>(સ્વામીની વાત: ૧/૫૬)</b>" },
-                { question: "ગુણાતીતોક્ષરં બ્રહ્મ", hint1: "ગુણાતીતાનંદ સ્વામી મૂળ", hint2: "...તે ભવબંધનથી મુક્ત થાય છે", answer: "<b>ગુણાતીતોક્ષરં બ્રહ્મ ભગવાન્ પુરુષોત્તમ:| <br>જનો જાનન્નિંદ સત્યં મુચ્યતે ભવ-બંધનાત ||</b> <br>ગુણાતીતાનંદ સ્વામી મૂળ અક્ષરબ્રહ્મ છે. <br>ભગવાન પુરુષોતમનારાયણ શ્રીજીમહારાજ છે. <br>જે જન આ સત્ય સિદ્ધાંત જાણે-સમજે છે તે ભવબંધનથી મુક્ત થાય છે. <b>(શ્લોક)</b>" }
-            ],
-			2: [
-                { question: "ભગવાનનો જે દ્રઢ આશરો", hint1: "એ જ એક સર્વ સાધનમાં મોટું સાધન છે", hint2: "...તે આશરો અતિ દૃઢ જોઈએ...", answer: "ભગવાનનો જે દ્રઢ આશરો એ જ એક સર્વ સાધનમાં મોટું સાધન છે, તેણે કરીને ભગવાન રાજી થાય છે. અને તે આશરો અતિ દૃઢ જોઈએ, જેને વિષે  કાંઈ પોલ રહે નહીં. <b>(ગઢડા પ્રથમ ૩૩: મૂઢપણું, પ્રીતિ ને સમજણનું)</b>" },
-                { question: "માયા તરવાનો ઉપાય એ છે જે", hint1: "જ્યારે સર્વ કર્મ અને માયા", hint2: "...અથવા તે ભગવાનના મળેલ સંત...", answer: "માયા તરવાનો ઉપાય એ છે જે, જ્યારે સર્વ કર્મ અને માયા તેનો નાશ કરનારા ને માયાથી પર જે સાક્ષાત્કાર શ્રીપુરુષોત્તમ ભગવાન અથવા તે ભગવાનના મળેલ સંત તેમની જીવને પ્રાપ્તિ જ્યારે થાય છે ત્યારે તેમના આશ્રયથી માયા ઉલ્લંઘાય છે. <b>(જેતલપુર ૧)</b>" },
-                { question: "ભગવાન અને મોટા સાધુને આશરે કરીને", hint1: "તો વાદળ જેવાં દુઃખ ", hint2: "...સાધને કરીને તો...", answer: "ભગવાન અને મોટા સાધુને આશરે કરીને તો વાદળ જેવાં દુઃખ આવવાનાં હોય તે પણ ટળી જાય ને સાધને કરીને તો ફૂટી ફૂટીને મરી જાય તો પણ ન ટળે. <b>(સ્વામીની વાત: ૧/૧૧૪)</b>" },
-                { question: "ભગવાનનો આશરો થયો છે", hint1: "તે જેવી તો કોઈ વાત", hint2: "સર્વ વાત થઈ રહી છે", answer: "ભગવાનનો આશરો થયો છે તે જેવી તો કોઈ વાત નથી, તેને તો સર્વ વાત થઈ રહી છે. કાંઈ કરવું બાકી રહ્યું નથી. <b>(સ્વામીની વાત: ૧/૧૩૯)</b>" },
-                { question: "ધન્યોસ્મિ પૂર્ણકામોસ્મિ", hint1: "નિષ્પાપો", hint2: "અક્ષરગુરુયોગેન", answer: "<b>ધન્યોસ્મિ પૂર્ણકામોસ્મિ નિષ્પાપો નિર્ભય: સુખી| <br> અક્ષરગુરુયોગેન સ્વામિનારાયણાશ્રયાત્ ॥</b> <br>અક્ષરબ્રહ્મ ગુરુના યોગે સ્વામિનારાયણ ભગવાનનો આશરો કરવાથી હું ધન્ય છું, પૂણર્કામ છું, નિષ્પાપ,નિભર્ય અને સુખી છું. <b>(સત્સંગદીક્ષા: ૧૯)</b>" },
-                { question: "મારું સ્વરૂપ તો", hint1: "માયા થકી મુક્ત ને પર", hint2: "એવું જે બ્રહ્મ તે", answer: "‘મારું સ્વરૂપ તો માયા થકી મુક્ત ને પર એવું જે બ્રહ્મ તે છે.’ એવી રીતે નિરંતર મનન કરતો સતો બ્રહ્મનો સંગ કરે તો એ બ્રહ્મનો ગુણ એ જીવને વિષે આવે. <b>(ગઢડા મધ્ય ૩૧: મનન દ્વારા બ્રહ્મનો સંગ કયાર્નું)</b>" },
-                { question: "આત્મિનષ્ઠા તો એવી રીતની", hint1: "હું ચૈતન્ય છું", hint2: "હું શુદ્ધ છું", answer: "આત્મિનષ્ઠા તો એવી રીતની જોઈએ જે, ‘હું ચૈતન્ય છું ને દેહ જડ છે, અને હું શુદ્ધ છું ને દેહ નરકરૂપ છે, અને હું અિવનાશી છું ને દેહ નાશવંત છે, અને હું આનંદરૂપ છું ને દેહ દુઃખરૂપ છે.’ એવી રીતે જ્યારે દેહ થકી પોતાના આત્માને સર્વ પ્રકારે અતિશય વિલક્ષણ સમજે, ત્યારે દેહને પોતાનું રૂપ માનીને વિષયમાં પ્રીતિ કરે જ નહીં. એવી રીતે આત્મજ્ઞાને કરીને વિષયની નિવૃત્તિ થાય છે. <b>(સારંગપુર ૧: મન જીત્યાનું)</b>" },
-                { question: "આપણો જન્મ બે વાત સાધવા ", hint1: "અક્ષરરૂપ થાવું", hint2: "...સંગ અનેક પ્રકારના...", answer: "આપણો જન્મ બે વાત સાધવા સારું થયો છે, તેમાં એક અક્ષરરૂપ થાવું, એમાં દેહ અંતરાયરૂપ છે; ને બીજું ભગવાનમાં જોડાવું, તેમાં સંગ અનેક પ્રકારના અંતરાયરૂપ છે. એ બે ખોટ ટાળવી <b>(સ્વામીની વાત: ૪/૯૯)</b>" }
-            ]
-        };
-
+        let data = {};
         let currentQuestions = [];
         let currentIndex = 0;
-        let remainingQuestions = [];
         let incorrectQuestions = [];
         let correctAnswers = 0;
-        let currentQuestion = null;
 
-        function choosePushpa(pushpaId) {
-            currentQuestions = [...data[pushpaId]];
-            remainingQuestions = [...data[pushpaId]].slice(0, 5); // Limit random test to 5 questions
+        // Load JSON data
+        fetch('data.json')
+            .then(response => response.json())
+            .then(jsonData => {
+                data = jsonData;
+                console.log("Data loaded successfully:", data);
+                createPushpaButtons();
+            })
+            .catch(error => console.error("Error loading data:", error));
+
+        function createPushpaButtons() {
+            const pushpaButtonsContainer = document.getElementById('pushpa-buttons');
+            Object.keys(data).forEach(pushpaId => {
+                const button = document.createElement('button');
+                button.className = 'pushpa-button';
+                button.innerText = `પુષ્પ ${pushpaId}`;
+                button.onclick = () => startTest(pushpaId, 5);
+                pushpaButtonsContainer.appendChild(button);
+            });
+        }
+        function goToMainPage() {
+    document.getElementById('main-page').style.display = 'block';
+    document.getElementById('pushpa-selection-page').style.display = 'none';
+    document.getElementById('question-container').style.display = 'none';
+    document.getElementById('test-summary-page').style.display = 'none';
+}
+
+        function startSinglePushpaTest() {
+            document.getElementById('main-page').style.display = 'none';
+            document.getElementById('pushpa-selection-page').style.display = 'block';
+        }
+
+        function startAllPushpaTest() {
+            startTest('all', 20);
+        }
+
+        function startTest(pushpaId, limit) {
+            if (pushpaId === 'all') {
+                currentQuestions = Object.values(data).flat().slice(0, limit);
+            } else {
+                currentQuestions = [...data[pushpaId]].slice(0, limit);
+            }
             currentIndex = 0;
-            document.getElementById("main-page").style.display = "none";
-            document.getElementById("choose-mode-page").style.display = "block";
-        }
-
-        function startPracticeMode() {
-            document.getElementById("choose-mode-page").style.display = "none";
-            document.getElementById("practice-page").style.display = "block";
-            loadPracticeQuestion();
-        }
-
-        function loadPracticeQuestion() {
-            const question = currentQuestions[currentIndex];
-            document.getElementById("question-text").innerText = question.question;
-            document.getElementById("hint1").innerText = question.hint1;
-            document.getElementById("hint2").innerText = question.hint2;
-            document.getElementById("answer").innerHTML = question.answer;
-
-            document.getElementById("hint1").style.display = "none";
-            document.getElementById("hint2").style.display = "none";
-            document.getElementById("answer").style.display = "none";
-        }
-
-function toggleHint(hintNum) {
-    const hintDiv = document.getElementById(`hint${hintNum}`);
-    const button = document.querySelector(`#show-hint${hintNum}-btn`); // Select the button by its ID
-
-    if (hintDiv.style.display === "block") {
-        // If the hint is visible, hide it
-        hintDiv.style.display = "none";
-        button.innerText = `Show Hint ${hintNum}`;
-    } else {
-        // If the hint is hidden, show it
-        hintDiv.style.display = "block";
-        button.innerText = `Hide Hint ${hintNum}`;
-    }
-}
-
-
-function toggleAnswer() {
-    const answerDiv = document.getElementById("answer");
-    const button = document.querySelector("#show-answer-btn"); // Select the button by its ID
-
-    if (answerDiv.style.display === "block") {
-        // If the answer is visible, hide it
-        answerDiv.style.display = "none";
-        button.innerText = "Show Answer";
-    } else {
-        // If the answer is hidden, show it
-        answerDiv.style.display = "block";
-        button.innerText = "Hide Answer";
-    }
-}
-
-
-        function nextQuestion() {
-            currentIndex = (currentIndex + 1) % currentQuestions.length;
-            loadPracticeQuestion();
-        }
-
-        function prevQuestion() {
-            currentIndex = (currentIndex - 1 + currentQuestions.length) % currentQuestions.length;
-            loadPracticeQuestion();
-        }
-
-        function startRandomTestForPushpa() {
-            document.getElementById("choose-mode-page").style.display = "none";
-            startRandomTest();
-        }
-
-function startRandomTestAllPushpa() {
-    // Prepare questions for all Pushpa
-    remainingQuestions = Object.values(data).flat().slice(0, 20); // Limit random test to 20 questions
-    incorrectQuestions = [];
-    correctAnswers = 0;
-
-    // Hide the main page
-    document.getElementById("main-page").style.display = "none";
-
-    // Show the random test page
-    document.getElementById("random-test-page").style.display = "block";
-
-    // Start with the first random question
-    nextRandomQuestion();
-
-        }
-
-        function startRandomTest() {
             incorrectQuestions = [];
             correctAnswers = 0;
-            document.getElementById("practice-page").style.display = "none";
-            document.getElementById("random-test-page").style.display = "block";
-            nextRandomQuestion();
+            document.getElementById('pushpa-selection-page').style.display = 'none';
+            document.getElementById('main-page').style.display = 'none';
+            document.getElementById('question-container').style.display = 'block';
+            loadQuestion();
         }
 
-        function nextRandomQuestion() {
-            if (remainingQuestions.length === 0) {
-                endRandomTest();
+        function loadQuestion() {
+            if (currentIndex >= currentQuestions.length) {
+                endTest();
                 return;
             }
-
-            const randomIndex = Math.floor(Math.random() * remainingQuestions.length);
-            currentQuestion = remainingQuestions.splice(randomIndex, 1)[0];
-
-            document.getElementById("random-question-text").innerText = currentQuestion.question;
-            document.getElementById("random-hint").innerText = currentQuestion.hint1;
-            document.getElementById("random-answer").innerHTML = currentQuestion.answer;
-
-            document.getElementById("random-hint").style.display = "none";
-            document.getElementById("random-answer").style.display = "none";
-        }
-
-        function showRandomHint() {
-            document.getElementById("random-hint").style.display = "block";
-        }
-
-        function showRandomAnswer() {
-            document.getElementById("random-answer").style.display = "block";
+            const question = currentQuestions[currentIndex];
+            document.getElementById('question-text').innerText = question.question;
+            document.getElementById('hint-container').style.display = 'none';
         }
 
         function markCorrect() {
             correctAnswers++;
-            nextRandomQuestion();
+            nextQuestion();
         }
 
         function markIncorrect() {
-            incorrectQuestions.push(currentQuestion);
-            nextRandomQuestion();
+            incorrectQuestions.push(currentQuestions[currentIndex]);
+            nextQuestion();
         }
 
-function endRandomTest() {
-    document.getElementById("random-test-page").style.display = "none";
-    document.getElementById("summary-page").style.display = "block";
+        function nextQuestion() {
+            currentIndex++;
+            loadQuestion();
+        }
 
-    const summaryDiv = document.getElementById("summary");
-    summaryDiv.innerHTML = `
-        <p class="correct">Correct Answers: ${correctAnswers}</p>
-        <p class="incorrect">Incorrect Questions:</p>
-        <ul style="list-style-type: none; padding: 0;">
-            ${incorrectQuestions
-                .map(
-                    (q, i) =>
-                        `<li class="incorrect" style="color: red; text-decoration: underline; cursor: pointer;" onclick="viewIncorrect(${i})">${q.question}</li>`
-                )
-                .join("")}
-        </ul>
+        function endTest() {
+            document.getElementById('question-container').style.display = 'none';
+            document.getElementById('test-summary-page').style.display = 'block';
+
+            document.getElementById('correct-count').innerText = `Correct Answers: ${correctAnswers}`;
+            document.getElementById('incorrect-count').innerText = `Incorrect Answers: ${incorrectQuestions.length}`;
+
+            const incorrectList = document.getElementById('incorrect-list');
+            incorrectList.innerHTML = '';
+            incorrectQuestions.forEach((q) => {
+                const listItem = document.createElement('li');
+                listItem.style.textAlign = 'center';
+                listItem.innerHTML = `<a href="#" onclick="viewAnswer('${q.question}', '${q.answer}')">${q.question}</a>`;
+                incorrectList.appendChild(listItem);
+            });
+        }
+
+        function viewAnswer(question, answer) {
+    const modalContent = `
+        <h3 style="margin-bottom: 10px;">${question}</h3>
+        <p style="margin-bottom: 20px;">${answer}</p>
+        <button onclick="closeModal()">Close</button>
     `;
-}
-
-function viewIncorrect(index) {
-    const question = incorrectQuestions[index];
-    document.getElementById("modal-question").innerText = question.question;
-    document.getElementById("modal-answer").innerHTML = question.answer;
-    document.getElementById("popup-modal").style.display = "flex";
+    const modal = document.createElement('div');
+    modal.id = 'popup-modal';
+    modal.style = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center;';
+    modal.innerHTML = `
+        <div style="background: white; padding: 20px; border-radius: 10px; max-width: 90%; text-align: center;">
+            ${modalContent}
+        </div>
+    `;
+    document.body.appendChild(modal);
 }
 
 function closeModal() {
-    document.getElementById("popup-modal").style.display = "none";
+    const modal = document.getElementById('popup-modal');
+    if (modal) {
+        modal.remove();
+    }
 }
-
-
-function returnToMain() {
-    // Hide all pages
-    document.getElementById("practice-page").style.display = "none";
-    document.getElementById("random-test-page").style.display = "none";
-    document.getElementById("summary-page").style.display = "none";
-    document.getElementById("choose-mode-page").style.display = "none";
-
-    // Clear the summary content to prevent it from appearing on the main page
-    document.getElementById("summary").innerHTML = "";
-
-    // Show the main page
-    document.getElementById("main-page").style.display = "block";
-
-    // Reset other components if needed (optional)
-    currentQuestions = [];
-    currentIndex = 0;
-    remainingQuestions = [];
-    incorrectQuestions = [];
-    correctAnswers = 0;
-    currentQuestion = null;
-
-}
-
-
-function restartTest() {
-    // Reset variables for the current Pushpa's test
-    incorrectQuestions = [];
-    correctAnswers = 0;
-    remainingQuestions = [...currentQuestions]; // Reload questions for the same Pushpa
-
-    // Restart the random test page
-    document.getElementById("summary-page").style.display = "none";
-    document.getElementById("random-test-page").style.display = "block";
-
-    // Start with the first question
-    nextRandomQuestion();
-}
-
 
     </script>
-<div id="popup-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center;">
-    <div style="background: white; padding: 20px; border-radius: 10px; max-width: 90%; text-align: center;">
-        <h3 id="modal-question" style="margin-bottom: 10px;">Question</h3>
-        <p id="modal-answer" style="margin-bottom: 20px;">Answer</p>
-        <button onclick="closeModal()">Close</button>
-    </div>
-</div>
-
-
 </body>
 </html>
