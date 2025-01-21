@@ -75,6 +75,29 @@
             background-color: lightgray;
         }
 
+        .hint-button {
+            padding: 10px 20px;
+            border: 1px solid black;
+            background-color: white;
+            color: black;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .hint-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 15px; /* Adds spacing between hint buttons */
+}
+
+#question-text {
+    margin-bottom: 30px; /* Adds spacing below the question */
+}
+
+
         .summary ul {
             list-style-type: none;
             padding: 0;
@@ -98,6 +121,28 @@
             text-align: center;
         }
 
+        .hint {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: gray;
+            font-weight: bold;
+        }
+
+        .footer .correct-btn {
+            color: green;
+            text-decoration: underline;
+        }
+
+        .footer .wrong-btn {
+            color: red;
+            text-decoration: underline;
+        }
+
+        .footer .main-page-btn {
+            color: #843232;
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 <body>
@@ -117,20 +162,26 @@
             <!-- Buttons will be dynamically created -->
         </div>
         <div class="footer">
-            <button onclick="goToMainPage()">Go to Main Page</button>
+            <button class="main-page-btn" onclick="goToMainPage()">Go to Main Page</button>
         </div>
     </div>
 
     <!-- Question Display Page -->
     <div id="question-container" style="display: none;">
         <h2 id="question-text">Question will appear here</h2>
-        <div id="hint-container" style="display: none; margin: 20px; font-weight: bold;">Hint will appear here</div>
+        <div class="hint-button-container">
+            <button class="hint-button" id="hint1-button" onclick="revealHint(1)">Show Hint 1</button>
+            <div id="hint1" class="hint" style="display: none;">Hint 1 content</div>
+
+            <button class="hint-button" id="hint2-button" onclick="revealHint(2)">Show Hint 2</button>
+            <div id="hint2" class="hint" style="display: none;">Hint 2 content</div>
+        </div>
         <div class="footer">
-            <button onclick="markCorrect()">Correct</button>
-            <button onclick="markIncorrect()">Wrong</button>
+            <button class="correct-btn" onclick="markCorrect()">Correct</button>
+            <button class="wrong-btn" onclick="markIncorrect()">Wrong</button>
             <button onclick="nextQuestion()">Next</button>
             <button onclick="endTest()">End Test</button>
-            <button onclick="goToMainPage()">Go to Main Page</button>
+            <button class="main-page-btn" onclick="goToMainPage()">Go to Main Page</button>
         </div>
     </div>
 
@@ -142,7 +193,7 @@
             <p id="incorrect-count">Incorrect Answers: 0</p>
             <ul id="incorrect-list"></ul>
             <div class="footer">
-                <button onclick="goToMainPage()">Go to Main Page</button>
+                <button class="main-page-btn" onclick="goToMainPage()">Go to Main Page</button>
             </div>
         </div>
     </div>
@@ -174,12 +225,6 @@
                 pushpaButtonsContainer.appendChild(button);
             });
         }
-        function goToMainPage() {
-    document.getElementById('main-page').style.display = 'block';
-    document.getElementById('pushpa-selection-page').style.display = 'none';
-    document.getElementById('question-container').style.display = 'none';
-    document.getElementById('test-summary-page').style.display = 'none';
-}
 
         function startSinglePushpaTest() {
             document.getElementById('main-page').style.display = 'none';
@@ -212,7 +257,19 @@
             }
             const question = currentQuestions[currentIndex];
             document.getElementById('question-text').innerText = question.question;
-            document.getElementById('hint-container').style.display = 'none';
+            document.getElementById('hint1').style.display = 'none';
+            document.getElementById('hint2').style.display = 'none';
+            document.getElementById('hint1-button').style.display = 'block';
+            document.getElementById('hint2-button').style.display = 'block';
+            document.getElementById('hint1').innerText = question.hint1;
+            document.getElementById('hint2').innerText = question.hint2;
+        }
+
+        function revealHint(hintNumber) {
+            const hintDiv = document.getElementById(`hint${hintNumber}`);
+            const hintButton = document.getElementById(`hint${hintNumber}-button`);
+            if (hintDiv) hintDiv.style.display = 'block';
+            if (hintButton) hintButton.style.display = 'none';
         }
 
         function markCorrect() {
@@ -271,6 +328,13 @@ function closeModal() {
     }
 }
 
+
+        function goToMainPage() {
+            document.getElementById('main-page').style.display = 'block';
+            document.getElementById('pushpa-selection-page').style.display = 'none';
+            document.getElementById('question-container').style.display = 'none';
+            document.getElementById('test-summary-page').style.display = 'none';
+        }
     </script>
 </body>
 </html>
