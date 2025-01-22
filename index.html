@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>અધિવેશન ૨૦૨૫</title>
+ 
+
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,7 +23,19 @@
             font-size: 2.5rem;
             font-weight: bold;
             color: orange;
-            margin-bottom: 20px;
+            margin-bottom: 1px;
+        }
+
+        .sub-title {
+            margin-top: 10px; /* Adjust this value to reduce space */
+            margin-bottom: 1px;
+        }
+        
+        .instruction{
+            color: #000000;
+            /*text-decoration: underline;*/
+            margin-top: -10px;
+            margin-bottom: 100px;
         }
 
         /* table parameters*/
@@ -52,6 +66,7 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
             justify-content: center;
+            margin-top: 10px;
         }
 
         .pushpa-button {
@@ -171,24 +186,25 @@
     <!-- Main Page -->
     <div id="main-page">
         <h1 class="main-title">અધિવેશન ૨૦૨૫</h1>
+        <h2 class="sub-title">મુખપાઠ અપેક્ષિત</h2>
         <div class="pushpa-selection-container">
-            <button class="pushpa-button" onclick="startSinglePushpaTest()">Single Pushpa Test</button>
-            <button class="pushpa-button" onclick="startAllPushpaTest()">All Pushpa Test</button>
-            <button class="pushpa-button" onclick="goToIMPPage()">Mukhpath IMPs</button>
+            <button class="pushpa-button" onclick="startSinglePushpaTest()"><span style="font-size: 1.5rem; color: #000;"><span>એક પુષ્પની પરીક્ષા</span></span><br><span style="font-size: 0.9rem; color: #843232;"><span>(કોઈપણ ૫ અવતરણો)</span></span></button>
+            <button class="pushpa-button" onclick="startAllPushpaTest()"><span style="font-size: 1.5rem; color: #000;"><span>બધા પુષ્પની પરીક્ષા</span></span><br><span style="font-size: 0.9rem; color: #843232;"><span>(કોઈપણ ૨૦ અવતરણો)</span></span></button>
+            <button class="pushpa-button" onclick="goToIMPPage()"><span style="font-size: 1.5rem;color:#000;"><span>મુખપાઠ IMPs</span></button>
         </div>
     </div>
 
    <!-- Mukhpath IMPs Page -->
    <div id="imp-page" style="display: none;">
-    <h1 class="main-title">Mukhpath IMPs</h1>
+    <h1 class="main-title">મુખપાઠ IMPs</h1>
     <div class="table-container">
  
    <table>
             <thead>
                 <tr>
-                    <th>Pushpa No (Quote No)</th>
-                    <th>Question</th>
-                    <th>Reference</th>
+                    <th>પુષ્પ (અવતરણ)</th>
+                    <th>અવતરણ</th>
+                    <th>સંદર્ભ</th>
                 </tr>
             </thead>
             <tbody id="imp-table-body">
@@ -204,7 +220,8 @@
 
     <!-- Pushpa Selection Page -->
     <div id="pushpa-selection-page" style="display: none;">
-        <h2 class="main-title">Select Pushpa</h2>
+        <h1 class="sub-title">પુષ્પ પસંદ કરો</h1>
+        <h૩ class="instruction">(પસંદ કરેલ પુષ્પમાંથી ૫ પ્રશ્નો દર્શાવશે. તમારી જાતે તમને આવડે તો Correct(સાચું)) કે ના આવડે તો Wrong(ખોટું) ક્લિક કરશો.) </h૩>
         <div class="pushpa-selection-container" id="pushpa-buttons">
             <!-- Buttons will be dynamically created -->
         </div>
