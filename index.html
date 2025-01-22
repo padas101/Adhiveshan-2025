@@ -24,6 +24,28 @@
             margin-bottom: 20px;
         }
 
+        /* table parameters*/
+        .table-container {
+            width: 90%;
+            margin: 20px auto;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
         .pushpa-selection-container {
             margin: 0 auto;
             display: grid;
@@ -152,8 +174,33 @@
         <div class="pushpa-selection-container">
             <button class="pushpa-button" onclick="startSinglePushpaTest()">Single Pushpa Test</button>
             <button class="pushpa-button" onclick="startAllPushpaTest()">All Pushpa Test</button>
+            <button class="pushpa-button" onclick="goToIMPPage()">Mukhpath IMPs</button>
         </div>
     </div>
+
+   <!-- Mukhpath IMPs Page -->
+   <div id="imp-page" style="display: none;">
+    <h1 class="main-title">Mukhpath IMPs</h1>
+    <div class="table-container">
+ 
+   <table>
+            <thead>
+                <tr>
+                    <th>Pushpa No (Quote No)</th>
+                    <th>Question</th>
+                    <th>Reference</th>
+                </tr>
+            </thead>
+            <tbody id="imp-table-body">
+                <!-- Rows will be dynamically created -->
+            </tbody>
+        </table>
+    </div>
+    <div class="footer">
+        <button onclick="goToMainPage()">Go to Main Page</button>
+    </div>
+</div>
+
 
     <!-- Pushpa Selection Page -->
     <div id="pushpa-selection-page" style="display: none;">
@@ -225,6 +272,44 @@
                 pushpaButtonsContainer.appendChild(button);
             });
         }
+
+
+        function goToIMPPage() {
+            document.getElementById('main-page').style.display = 'none';
+            document.getElementById('imp-page').style.display = 'block';
+            populateIMPTable();
+        }
+
+        function populateIMPTable() {
+            const tableBody = document.getElementById('imp-table-body');
+            tableBody.innerHTML = ''; // Clear existing rows
+
+            Object.keys(data).forEach((pushpaId) => {
+                data[pushpaId].forEach((item, index) => {
+                    const row = document.createElement('tr');
+
+                    // Column 1: Pushpa No/Quote No
+                    const pushpaQuoteCell = document.createElement('td');
+                    pushpaQuoteCell.innerText = `પુષ્પ:${pushpaId} (${index + 1})`;
+                    row.appendChild(pushpaQuoteCell);
+
+                    // Column 2: Question
+                    const questionCell = document.createElement('td');
+                    questionCell.innerText = item.question;
+                    row.appendChild(questionCell);
+
+                    // Column 3: Reference (remove parentheses from the reference)
+                    const referenceCell = document.createElement('td');
+                    const referenceText = item.answer.match(/\((.*?)\)/);
+                    referenceCell.innerText = referenceText ? referenceText[1] : 'No Reference';
+                    row.appendChild(referenceCell);
+
+                    tableBody.appendChild(row);
+                });
+            });
+        }
+        
+
 
         function startSinglePushpaTest() {
             document.getElementById('main-page').style.display = 'none';
@@ -334,6 +419,8 @@ function closeModal() {
             document.getElementById('pushpa-selection-page').style.display = 'none';
             document.getElementById('question-container').style.display = 'none';
             document.getElementById('test-summary-page').style.display = 'none';
+            document.getElementById('main-page').style.display = 'block';
+            document.getElementById('imp-page').style.display = 'none';
         }
     </script>
 </body>
