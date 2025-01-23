@@ -225,7 +225,7 @@
         <h2 class="sub-title">મુખપાઠ અપેક્ષિત</h2>
         <div class="pushpa-selection-container">
             <button class="pushpa-button" onclick="startSinglePushpaTest()"><span style="font-size: 1.5rem; color: #000;"><span>એક પુષ્પની પરીક્ષા</span></span><br><span style="font-size: 0.9rem; color: #843232;"><span>(કોઈપણ ૫ અવતરણો)</span></span></button>
-            <button class="pushpa-button" onclick="startAllPushpaTest()"><span style="font-size: 1.5rem; color: #000;"><span>બધા પુષ્પની પરીક્ષા</span></span><br><span style="font-size: 0.9rem; color: #843232;"><span>(કોઈપણ ૨૦ અવતરણો)</span></span></button>
+            <button class="pushpa-button" onclick="startAllPushpaTest()"><span style="font-size: 1.5rem; color: #000;"><span>બધા પુષ્પોની પરીક્ષા</span></span><br><span style="font-size: 0.9rem; color: #843232;"><span>(કોઈપણ ૨૦ અવતરણો)</span></span></button>
             <button class="pushpa-button" onclick="goToIMPPage()"><span style="font-size: 1.5rem;color:#000;"><span>મુખપાઠ IMPs</span></button>
         </div>
     </div>
@@ -270,7 +270,13 @@
 
     <!-- Question Display Page -->
     <div id="question-container" style="display: none;">
-        <h2 id="question-text">Question will appear here</h2>
+        <h2 id="test-title" style="margin-bottom: 20px; text-decoration: underline; padding-bottom: 1.3cm;text-underline-offset: 10px; text-decoration-color: #000; color: #843232;" >Test Title</h2>
+        <h3 id="test-title" style="margin-bottom: 20px; font-size: 22px; color: #843232;" >પ્રશ્ન:</h3>
+        <h2 style="padding-bottom: 20px;" id="question-text">Question will appear here</h2>
+
+
+            <!-- The question and buttons go here -->
+      
         <div class="hint-button-container">
             <button class="hint-button" id="hint1-button" onclick="revealHint(1)">Show Hint 1</button>
             <div id="hint1" class="hint" style="display: none;">Hint 1 content</div>
@@ -381,19 +387,27 @@
         }
 
         function startTest(pushpaId, limit) {
-            if (pushpaId === 'all') {
-                currentQuestions = Object.values(data).flat().slice(0, limit);
-            } else {
-                currentQuestions = [...data[pushpaId]].slice(0, limit);
-            }
-            currentIndex = 0;
-            incorrectQuestions = [];
-            correctAnswers = 0;
-            document.getElementById('pushpa-selection-page').style.display = 'none';
-            document.getElementById('main-page').style.display = 'none';
-            document.getElementById('question-container').style.display = 'block';
-            loadQuestion();
-        }
+    const titleElement = document.getElementById('test-title');
+    
+    if (pushpaId === 'all') {
+        currentQuestions = Object.values(data).flat().slice(0, limit);
+        titleElement.innerText = 'બધા પુષ્પોની પરીક્ષા';
+    } else {
+        currentQuestions = [...data[pushpaId]].slice(0, limit);
+        titleElement.innerText = `પુષ્પ: ${pushpaId} ની પરીક્ષા`;
+    }
+
+    currentIndex = 0;
+    incorrectQuestions = [];
+    correctAnswers = 0;
+
+    document.getElementById('pushpa-selection-page').style.display = 'none';
+    document.getElementById('main-page').style.display = 'none';
+    document.getElementById('question-container').style.display = 'block';
+
+    loadQuestion();
+}
+
 
         function loadQuestion() {
             if (currentIndex >= currentQuestions.length) {
