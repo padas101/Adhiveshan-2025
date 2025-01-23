@@ -198,6 +198,7 @@
    <div id="imp-page" style="display: none;">
     <h1 class="main-title">મુખપાઠ IMPs</h1>
     <div class="table-container">
+        <div class="table-container" style="margin-bottom: 60px;">
  
    <table>
             <thead>
@@ -298,33 +299,34 @@
         }
 
         function populateIMPTable() {
-            const tableBody = document.getElementById('imp-table-body');
-            tableBody.innerHTML = ''; // Clear existing rows
+    const tableBody = document.getElementById('imp-table-body');
+    tableBody.innerHTML = ''; // Clear existing rows
 
-            Object.keys(data).forEach((pushpaId) => {
-                data[pushpaId].forEach((item, index) => {
-                    const row = document.createElement('tr');
+    Object.keys(data).forEach((pushpaId) => {
+        data[pushpaId].forEach((item, index) => {
+            const row = document.createElement('tr');
 
-                    // Column 1: Pushpa No/Quote No
-                    const pushpaQuoteCell = document.createElement('td');
-                    pushpaQuoteCell.innerText = `પુષ્પ:${pushpaId} (${index + 1})`;
-                    row.appendChild(pushpaQuoteCell);
+            // Column 1: Pushpa No/Quote No
+            const pushpaQuoteCell = document.createElement('td');
+            pushpaQuoteCell.innerText = `${pushpaId}/${index + 1}`;
+            row.appendChild(pushpaQuoteCell);
 
-                    // Column 2: Question
-                    const questionCell = document.createElement('td');
-                    questionCell.innerText = item.question;
-                    row.appendChild(questionCell);
+            // Column 2: Question with Answer button
+            const questionCell = document.createElement('td');
+            questionCell.innerHTML = `${item.question} <button onclick="showAnswer('${item.answer}')">Answer</button>`;
+            row.appendChild(questionCell);
 
-                    // Column 3: Reference (remove parentheses from the reference)
-                    const referenceCell = document.createElement('td');
-                    const referenceText = item.answer.match(/\((.*?)\)/);
-                    referenceCell.innerText = referenceText ? referenceText[1] : 'No Reference';
-                    row.appendChild(referenceCell);
+            // Column 3: Reference (remove parentheses from the reference)
+            const referenceCell = document.createElement('td');
+            const referenceText = item.answer.match(/\((.*?)\)/);
+            referenceCell.innerText = referenceText ? referenceText[1] : 'No Reference';
+            row.appendChild(referenceCell);
 
-                    tableBody.appendChild(row);
-                });
-            });
-        }
+            tableBody.appendChild(row);
+        });
+    });
+}
+
         
 
 
@@ -439,6 +441,33 @@ function closeModal() {
             document.getElementById('main-page').style.display = 'block';
             document.getElementById('imp-page').style.display = 'none';
         }
+        
+        
+function showAnswer(answer) {
+    const modalContent = `
+        <h3 style="margin-bottom: 10px;">Answer</h3>
+        <p style="margin-bottom: 20px;">${answer}</p>
+        <button onclick="closeModal()">Close</button>
+    `;
+    const modal = document.createElement('div');
+    modal.id = 'popup-modal';
+    modal.style = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center;';
+    modal.innerHTML = `
+        <div style="background: white; padding: 20px; border-radius: 10px; max-width: 90%; text-align: center;">
+            ${modalContent}
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function closeModal() {
+    const modal = document.getElementById('popup-modal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+
     </script>
 </body>
 </html>
