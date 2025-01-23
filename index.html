@@ -85,6 +85,38 @@
             transform: scale(1.05);
         }
 
+        .test {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: none;
+            padding: 10px;
+
+
+        }
+        .test button {
+            padding: 10px 20px;
+
+            border-radius: 1px;
+            cursor: pointer;
+        }
+        
+        .test button:hover {
+            background-color:lightgray;
+        }
+
+
+
+        .test .false-btn {
+            color: red;
+            text-decoration: underline;
+        }
+
+
         .footer {
             position: fixed;
             bottom: 0;
@@ -112,6 +144,7 @@
             background-color: lightgray;
         }
 
+        
         .hint-button {
             padding: 10px 20px;
             border: 1px solid black;
@@ -180,12 +213,13 @@
             text-decoration: underline;
         }
 
+
     </style>
 </head>
 <body>
     <!-- Main Page -->
     <div id="main-page">
-    <div class="banner" style="background-image: url('adhiveshan_image.jpg'); background-size: cover; background-position: center; min-height: 270px; display: flex; justify-content: center; align-items: center;">
+        <div class="banner" style="background-image: url('adhiveshan_image.jpg'); background-size: cover; background-position: center; min-height: 270px; display: flex; justify-content: center; align-items: center;">
         </div>
         <h1 class="main-title">અધિવેશન ૨૦૨૫</h1>
         <h2 class="sub-title">મુખપાઠ અપેક્ષિત</h2>
@@ -215,6 +249,7 @@
             </tbody>
         </table>
     </div>
+    
     <div class="footer">
         <button onclick="goToMainPage()">Go to Main Page</button>
     </div>
@@ -243,9 +278,13 @@
             <button class="hint-button" id="hint2-button" onclick="revealHint(2)">Show Hint 2</button>
             <div id="hint2" class="hint" style="display: none;">Hint 2 content</div>
         </div>
+
+        <div class="correct-wrong-container" style="margin-top: 20px; display: flex; justify-content: center; gap: 20px;">
+            <button class="true-btn" onclick="markCorrect()" style="font-size: 1.2rem; padding: 10px 20px; color: rgb(4, 114, 33); cursor: pointer;">Correct</button>
+            <button class="false-btn" onclick="markIncorrect()" style="font-size: 1.2rem; padding: 10px 20px; color: red; cursor: pointer;">Wrong</button>
+        </div>
+        
         <div class="footer">
-            <button class="correct-btn" onclick="markCorrect()">Correct</button>
-            <button class="wrong-btn" onclick="markIncorrect()">Wrong</button>
             <button onclick="nextQuestion()">Next</button>
             <button onclick="endTest()">End Test</button>
             <button class="main-page-btn" onclick="goToMainPage()">Go to Main Page</button>
